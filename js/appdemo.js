@@ -10,3 +10,13 @@ $('.slider').slider('start');
 $('.slider').slider('next');
 // Previous slide
 $('.slider').slider('prev');
+
+$('.flexdatalist').flexdatalist({
+     minLength: 1,
+     textProperty: '{capital}, {name}, {continent}',
+     valueProperty: 'id',
+     selectionRequired: true,
+     visibleProperties: ["name","capital","continent"],
+     searchIn: 'name',
+     data: 'countries.json'
+});
