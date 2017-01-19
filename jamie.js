@@ -47,6 +47,7 @@ var searchYouTube = "zucchini, cheese, beef";
           iFrame.attr("height", "195");
           iFrame.attr("src", videoSRC);
           iFrame.attr("frameborder", "0");
+          iFrame.attr("id", "recipeVideo");
 
           $("#videoBank").append(iFrameDiv);
           iFrameDiv.append(iFrame);
