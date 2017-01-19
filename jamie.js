@@ -1,3 +1,16 @@
+//Functionality for sliding images at top of page
+$(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+
+// Pause slider
+$('.slider').slider('pause');
+// Start slider
+$('.slider').slider('start');
+// Next slide
+$('.slider').slider('next');
+// Previous slide
+
 
 //Pulling data from youTube and populating page with videos
 
