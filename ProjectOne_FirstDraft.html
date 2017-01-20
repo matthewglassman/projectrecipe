@@ -76,12 +76,13 @@
     <div class="row">
        <div class="col s12">
           <div class="card-panel">
-          <h2>Ingredients</h2>
-          <form>
-          <div class="row">
-          <div class="col s12">
 
-          <input type='text'
+              <h2>Ingredients</h2>
+              <form>
+                  <div class="row">
+                      <div class="col s12">
+
+                  <input type='text'
                  placeholder="Type in your ingredients..."
                  class="flexdatalist"
                  data-data="ingredients.json"
@@ -94,17 +95,16 @@
                  multiple="multiple"
                  name="ingredient_id">
 
-      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-    <i class="material-icons right">send</i>
+                     <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
 
-  </button>
-
-      </div>
-      </div>
-    </form>
-
-      </div>
-      </div>
+                </div><!--End of col12-->
+              </div><!--End of row-->
+            </form>
+          </div><!--End of cardpanel-->
+      </div><!--End of col12-->
+    </div><!--end of row-->
 
 <!-- Box Where Selected Ingredients Will Populate -->
 <!--   <div class="col l6">
@@ -116,35 +116,36 @@
 
 
 <!-- Tabs to display recipes and videos -->
-    <div class="row">
+<div class="row">
     <div class="col s12">
       <ul class="tabs">
         <li class="tab col s6"><a href="#recipeBank">Recipes</a></li>
         <li class="tab col s6"><a class="active" href="#videoBank">Videos</a></li>
         <!-- <li class="tab col s4"><a href="#test4">Pins</a></li> -->
       </ul>
-    </div>
-    <div id="recipeBank" class="col s12"></div>
-    <div id="videoBank" class="col s12"></div>
+
+
+    </div><!--End of col12-->
+    <div id="recipeBank" class="col s12">Recipes</div>
+    <div id="videoBank" class="col s12">Videos</div>
     <!-- <div id="test3" class="col s12">Test 3</div> -->
-  </div>
+  </div><!--End of row-->
+</div> <!--End of container-->
+
 
   <footer class="page-footer">
-  <div class="row">
-  <div class="col s12 m6 l6">
-
-  </div>
-  <div class="col">
-
-  </div>
-  </div>
-  <div class="footer-copyright">
-  <div class="container">
-   © 2017 Copyright Polished Papayas
-    <a class="grey-text text-lighten-4 right" href="#!">Links</a>
-  </div>
-  </div>
+     <div class="row">
+        <div class="col s12 m6 l6">
+        </div>
+        <div class="col">
+        </div>
+    </div>
+      <div class="footer-copyright container">
+           © 2017 Copyright Polished Papayas
+            <a class="grey-text text-lighten-4 right" href="#!">Links</a>
+       </div>
   </footer>
+
 
   <!-- jQuery is required by Materialize to function -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
