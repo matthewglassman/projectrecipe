@@ -8,6 +8,8 @@
 
     <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
 
+    <link type="text/css" rel="stylesheet" href="css/jquery.flexdatalist.css">
+
     <link type="text/css" rel="stylesheet" href="css/style.css">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -80,17 +82,17 @@
           <div class="col s12">
 
           <input type='text'
-                 placeholder='Type in your ingredients...'
-                 class='flexdatalist'
-                 data-data='countries.json'
-                 data-search-in='name'
-                 data-visible-properties='["name","capital","continent"]'
-                 data-selection-required='true'
-                 data-value-property='id'
-                 data-text-property='{capital}, {name}, {continent}'
-                 data-min-length='1'
-                 multiple='multiple'
-                 name='country_id_3'>
+                 placeholder="Type in your ingredients..."
+                 class="flexdatalist"
+                 data-data="ingredients.json"
+                 data-search-in="name"
+                 data-visible-properties="name"
+                 data-selection-required="true"
+                 data-value-property="id"
+                 data-text-property="{name}"
+                 data-min-length="1"
+                 multiple="multiple"
+                 name="ingredient_id">
 
       <button class="btn waves-effect waves-light" type="submit" name="action">Submit
     <i class="material-icons right">send</i>
@@ -147,9 +149,9 @@
   <!-- jQuery is required by Materialize to function -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.js"></script>
-  <script type="text/javascript" src="jamie.js">
-    //custom JS code
-  </script>
+  <script type="text/javascript" src="js/jquery.flexdatalist.js"> </script>
+  <script type="text/javascript" src="js/jamie.js"> </script>
+
 
 </body>
 </html>

@@ -59,13 +59,3 @@ var searchYouTube = "zucchini, cheese, beef";
 }
 
 populateYouTubeVideos();
-
-$('.flexdatalist').flexdatalist({
-     minLength: 1,
-     textProperty: "{name}",
-     valueProperty: "id",
-     selectionRequired: true,
-     visibleProperties: "name",
-     searchIn: "name",
-     data: "http://projects.sergiodinislopes.pt/flexdatalist/countries.json"
-});
