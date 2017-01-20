@@ -18,7 +18,7 @@ function populateYouTubeVideos(){
 
 var searchYouTube = "zucchini, cheese, beef";
 
- var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchYouTube+"&type=video&order=date&maxResults=10&key=AIzaSyBpu8hgnXbkqFVWrAvwRUEz7T13ii3I7WM";
+ var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchYouTube+"&type=video&order=relevance&maxResults=10&key=AIzaSyBpu8hgnXbkqFVWrAvwRUEz7T13ii3I7WM";
       console.log(searchYouTube);
       console.log(queryURL);
 
