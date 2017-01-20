@@ -1,28 +1,10 @@
-   $(document).ready(function(){
-      $('.slider').slider({full_width: true});
-    });
 
-// Pause slider
-$('.slider').slider('pause');
-// Start slider
-$('.slider').slider('start');
-// Next slide
-$('.slider').slider('next');
-// Previous slide
-$('.slider').slider('prev');
+//---------------------------------------------------------------------------------------
+//----------------------------VARIABLES--------------------------------------------------
+var errMsg = "Not Available"   
 
-/*$('.flexdatalist').flexdatalist({
-     minLength: 1,
-     textProperty: '{capital}, {name}, {continent}',
-     valueProperty: 'id',
-     selectionRequired: true,
-     visibleProperties: ["name","capital","continent"],
-     searchIn: 'name',
-     data: 'countries.json'
-});
-*/
 //--------------------------------------------------------------------------------------
-//--------------------------FUNCTIONS---------------------------------------------------
+//-----------------------------FUNCTIONS------------------------------------------------
 
 // This function checks if a property for the JSON object exists
 function checkPropExists(objProp, objRef){
@@ -58,6 +40,29 @@ function addIngredients(inputArray){
 
 //--------------------------------------------------------------------------------------
 //--------------------------MAIN PROCESS------------------------------------------------
+$(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+
+// Pause slider
+$('.slider').slider('pause');
+// Start slider
+$('.slider').slider('start');
+// Next slide
+$('.slider').slider('next');
+// Previous slide
+$('.slider').slider('prev');
+
+/*$('.flexdatalist').flexdatalist({
+     minLength: 1,
+     textProperty: '{capital}, {name}, {continent}',
+     valueProperty: 'id',
+     selectionRequired: true,
+     visibleProperties: ["name","capital","continent"],
+     searchIn: 'name',
+     data: 'countries.json'
+});
+*/
 
 //Spoonacular API call
 // This .on("click") function will trigger the AJAX Call
@@ -121,7 +126,7 @@ $("#find-recipe").on("click", function(event) {
                 //Get the recipe title
                 console.log("Title: " + recipeResults[i].title);
                 if (recipeResults[i].title === "undefined" || recipeResults[i].title === " " ) {
-                        recipeTitle = "Not Available";
+                        recipeTitle = errMsg;
                 }else{
                     recipeTitle = recipeResults[i].title;
                 }
@@ -130,7 +135,7 @@ $("#find-recipe").on("click", function(event) {
                 //Get the Ready in Minutes
                 console.log("Cooking minutes: " + recipeResults[i].readyInMinutes);
                 if (recipeResults[i].readyInMinutes === "undefined" || recipeResults[i].readyInMinutes === 0 ) {
-                        readyMins = "Not Available";
+                        readyMins = errMsg;
                 }else{
                     readyMins = recipeResults[i].readyInMinutes;
                 }
@@ -138,7 +143,7 @@ $("#find-recipe").on("click", function(event) {
                 //Get the Credit text
                 console.log("Credit text: " + recipeResults[i].sourceName);
                 if (recipeResults[i].sourceName === "undefined" || recipeResults[i].sourceName === " " ) {
-                        creditText = "Not Available";
+                        creditText = errMsg;
                 }else{
                     creditText = recipeResults[i].sourceName;
                 }
@@ -152,7 +157,7 @@ $("#find-recipe").on("click", function(event) {
                 //Get the recipe URL
                 console.log("Recipe URL: " + recipeResults[i].sourceUrl);
                 if (recipeResults[i].sourceUrl === "undefined" || recipeResults[i].sourceUrl === " " ) {
-                        recipeURL = "Not Available";
+                        recipeURL = errMsg;
                 }else{
                     recipeURL = recipeResults[i].recipeURL;
                 }
