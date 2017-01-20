@@ -7,6 +7,13 @@
 
 }
 
+#loginBox{
+margin-left: 100px;
+margin-top: 100px;
+  border-radius: 3px;
+
+}
+
 #loginButton{
   color: white;
 }
