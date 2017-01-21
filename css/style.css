@@ -32,4 +32,124 @@ margin-top: 100px;
   color: white;
 }
 
+/* ---------Style for card panels with animation------------------ */
 
+.card .card-content{
+  width: 290px;
+	height: 460px;
+	display: inline-block;
+  margin: -20px;
+  
+}
+.ch-item {
+	width: 100%;
+	height: 100%;
+	xborder-radius: 50%;
+	overflow: hidden;
+	position: relative;
+	cursor: default;
+	box-shadow: 
+		inset 0 0 0 16px rgba(255,255,255,0.6),
+		0 1px 2px rgba(0,0,0,0.1);
+	transition: all 0.4s ease-in-out;
+}
+.ch-img-1 { 
+	background-image: url(https://spoonacular.com/recipeImages/Buttermilk-Fried-Chicken-with-Gravy-414193.jpg);
+  background-size: cover;
+}
+.ch-info {
+	position: absolute;
+	background: rgba(63,147,147, 0.8);
+	width: inherit;
+	height: inherit;
+	xborder-radius: 50%;
+	overflow: hidden;
+	xopacity: 0;
+	transition: all 0.4s ease-in-out;
+	transform: scale(0);
+}
+
+.ch-info h3 {
+	color: #fff;
+	xtext-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 22px;
+	margin: 0 10px 0px;
+	padding: 20px 0 0 0;
+	xheight: 140px;
+	font-family: 'Open Sans', Arial, sans-serif;
+	text-shadow: 
+		0 0 1px #fff, 
+		0 1px 2px rgba(0,0,0,0.3);
+}
+.ch-info h6 {
+	color: rgba(255,255,255,0.7);
+	xtext-transform: uppercase;
+	xletter-spacing: 1px;
+	xfont-size: 22px;
+	margin: 0 10px 10px;
+	padding: 10px 0 0 0;
+	xheight: 140px;
+	font-family: 'Open Sans', Arial, sans-serif;
+}
+.ch-info h5 {
+	font-size: 16px;
+  font-weight: 600;
+	margin: 0 10px 0px;
+	padding: 10px 0 0 0;
+  border-top: 1px solid rgba(255,255,255,0.3);
+	font-family: 'Open Sans', Arial, sans-serif;
+}
+.ch-info ul{
+  font-size: 14px;
+  font-weight: 400;
+	margin: 0 10px 0px;
+  padding-top: 2px;
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+.ch-info p.readymin {
+	xcolor: #fff;
+  font-size: 15px;
+	padding-top: 20px;
+	font-style: italic;
+	margin: 0 30px;
+	xborder-top: 1px solid rgba(255,255,255,0.5);
+	opacity: 0;
+	transition: all 1s ease-in-out 0.4s;
+}
+.ch-info p a {
+	display: block;
+	color: rgba(255,255,255,0.7);
+	font-style: normal;
+	font-weight: 500;
+	xtext-transform: uppercase;
+  text-align: right;
+	font-size: 14px;
+	letter-spacing: 1px;
+	padding-top: 8px;
+	font-family: 'Open Sans', Arial, sans-serif;
+}
+#recipe-source{
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  width: inherit;
+  text-align: right;
+}
+.ch-info p a:hover {
+	color: rgba(255,242,34, 0.8);
+}
+.ch-item:hover {
+	box-shadow: 
+		inset 0 0 0 1px rgba(255,255,255,0.1),
+		0 1px 2px rgba(0,0,0,0.1);
+}
+.ch-item:hover .ch-info {
+	transform: scale(1);
+	opacity: 1;
+}
+.ch-item:hover .ch-info p {
+	opacity: 1;
+}
+
+/* -----------------------------------------------------------------------*/
