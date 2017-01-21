@@ -1,3 +1,14 @@
+
+div{
+    outline-style: dotted;
+    outline-color: orange;
+    margin: 2px;
+}
+
+#mainImage{
+  background-image: url("../images/food-drink-kitchen-cutting-board.jpg");
+}
+
 #videoBank{
   margin-top: 10px;
   text-align: center;
@@ -25,3 +36,6 @@ border-radius: 3px;
   color: white;
 }
 
+h2{
+  color: white;
+}
