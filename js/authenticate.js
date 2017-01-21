@@ -91,8 +91,15 @@ $("#signup").on("click", function(event){
 
 //Add realtime listener to catch authorization state change
 firebase.auth().onAuthStateChanged(function(firebaseUser){
-	if(firebaseUser) {
-		console.log(firebaseUser);
+	if(firebaseUser != null) {
+		//console.log(firebaseUser);
+	//var user = firebase.auth().current;
+	var email;
+	//@console.log(user);
+	
+		email = firebaseUser.email;
+		console.log(email);
+	
 		$("#logout").show();
 		$("#signup").hide();
 		$("#login").hide();
