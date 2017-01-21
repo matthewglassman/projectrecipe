@@ -25,7 +25,7 @@ function addIngredients(inputArray){
 
     for (var i = 0, j = inputArray.length; i < j; i++) {
         //Add check for undefined
-            ingredArray[i] = inputArray[i].originalString;
+            ingredArray[i] = inputArray[i].amount + inputArray[i].unitLong + " " + inputArray[i].name;
     }
 
     //Debugging and Logging
@@ -124,6 +124,7 @@ $("#find-recipe").on("click", function(event) {
                 var usedIngredArray = [];
                 var missedIngredArray = [];
                 var recipeURL = "";
+                var imageURL = "";
 
                 //Get the recipe title
                 console.log("Title: " + recipeResults[i].title);
@@ -162,6 +163,14 @@ $("#find-recipe").on("click", function(event) {
                         recipeURL = errMsg;
                 }else{
                     recipeURL = recipeResults[i].recipeURL;
+                }
+
+                //Get Image URL
+                console.log("Image URL: " + recipeResults[i].image);
+                if (recipeResults[i].image === "undefined" || recipeResults[i].image === " " ) {
+                        imageURL = errMsg;
+                }else{
+                    imageURL = recipeResults[i].image;
                 }
 
 
