@@ -1,15 +1,7 @@
-//Functionality for sliding images at top of page
-$(document).ready(function(){
-      $('.slider').slider({full_width: true});
-    });
-
-// Pause slider
-$('.slider').slider('pause');
-// Start slider
-$('.slider').slider('start');
-// Next slide
-$('.slider').slider('next');
-// Previous slide
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
 
 
 //Pulling data from youTube and populating page with videos
@@ -64,4 +56,4 @@ var numRecipesToReturn = "10";
 });
 }
 
-populateYouTubeVideos();
+// populateYouTubeVideos();

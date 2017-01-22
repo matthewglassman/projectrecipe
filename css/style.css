@@ -1,12 +1,16 @@
-
+/*
 div{
     outline-style: dotted;
     outline-color: orange;
     margin: 2px;
-}
+}*/
 
 #mainImage{
-  background-image: url("../images/food-drink-kitchen-cutting-board.jpg");
+  background-image: url("../images/food-salad-healthy-vegetables.jpg");
+  opacity: 0.5;
+  max-width: 100%;
+  height: 600px;
+  background-size: cover;
 }
 
 #videoBank{
@@ -36,6 +40,11 @@ border-radius: 3px;
   color: white;
 }
 
-h2{
+h2 {
   color: white;
 }
+
+#usernameInput{
+  width: 500px;
+}
+
