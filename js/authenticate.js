@@ -11,6 +11,8 @@
 
 var database = firebase.database();
 
+var gotNumber = [];
+
 //Get elements
 // email = document.getElementById('email');
 // password = document.getElementById('password');
@@ -94,19 +96,33 @@ firebase.auth().onAuthStateChanged(function(firebaseUser){
 	if(firebaseUser != null) {
 		//console.log(firebaseUser);
 	//var user = firebase.auth().current;
-	var email;
+	//var email;
 	//@console.log(user);
 	
 		email = firebaseUser.email;
 		console.log(email);
-	
+		email.show();
 		$("#logout").show();
+		$("#numbertest").show();
 		$("#signup").hide();
 		$("#login").hide();
+		$("#email").hide();
+		$("#password").hide();
 	} else {
 		console.log('not logged in');
 		$("#logout").hide();
+		$("#numbertest").hide();
 		$("#signup").show();
 		$("#login").show();
+		$("#email").show();
+		$("#password").show();
 	}
+});
+
+$("#numberadd").on("click", function(event){
+	event.preventDefault();
+	var gotNumber = $("#number").val().trim();
+	$("#numbershow").append(gotNumber);
+
+			
 });
