@@ -5,9 +5,16 @@ div{
     margin: 2px;
 }*/
 
+.brand-logo, h2 {
+  font-family: 'Rock Salt', cursive;
+}
+
+#usernameInput.input-field{
+  width: 350px;
+}
+
 #mainImage{
   background-image: url("../images/food-salad-healthy-vegetables.jpg");
-  opacity: 0.5;
   max-width: 100%;
   height: 600px;
   background-size: cover;
