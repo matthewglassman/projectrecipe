@@ -144,10 +144,20 @@ $("#numberadd").on("click", function(event){
 	});
 });
 
-database.ref().on("value", function(snapshot) {
+/*database.ref().on("value", function(snapshot) {
 	  console.log(snapshot.val());
       console.log(snapshot.val().User);
       console.log(snapshot.val().number);
 }, function(errorObject) {
       console.log("Errors handled: " + errorObject.code);
+});*/
+
+database.ref().once('value', function(snapshot) {
+  		snapshot.forEach(function(childSnapshot) {
+	  console.log(childSnapshot.val());
+      console.log(childSnapshot.val().User);
+      console.log(childSnapshot.val().number);
+}, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+});
 });
