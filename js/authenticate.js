@@ -145,9 +145,11 @@ $("#numberadd").on("click", function(event){
 });
 
 database.ref().on("value", function(snapshot) {
-	  console.log(snapshot.val());
-      console.log(snapshot.val().User);
-      console.log(snapshot.val().number);
+	 for (var key in snapshot.val()){ 
+	  //console.log(snapshot.val());
+      console.log(snapshot.val()[key].User);
+      console.log(snapshot.val()[key].number);
+  };
 }, function(errorObject) {
       console.log("Errors handled: " + errorObject.code);
 });
