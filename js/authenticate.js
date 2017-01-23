@@ -36,13 +36,17 @@ $("#login").on("click", function(event){
 		console.log("Problem: " + errorCode + " Message: " +errorMessage);
 	}).then(function(success){
 		console.log("Logged In", success);
+		//Clear out number and numbershow
+		$("#numbershow").empty();
+		// $("#number").empty();
+		$("#number").text("")
 	});
 });
 
 //Log Out functionality
 $("#logout").on("click", function(event){
 	firebase.auth().signOut();
-	//$("#numbershow").clear();
+	$("#numbershow").hide();
 });
 
 //Add Sign Up Event
@@ -110,11 +114,12 @@ firebase.auth().onAuthStateChanged(function(firebaseUser){
 		$("#email").hide();
 		$("#password").hide();
 		$("#loggedinuser").html(email);
+		$("#numbershow").show();
 	} else {
 		console.log('not logged in');
 		$("#logout").hide();
 		$("#numbertest").hide();
-		$("#numbertest").clear();
+		$("#number").text("");
 		$("#signup").show();
 		$("#login").show();
 		$("#email").show();
@@ -129,5 +134,20 @@ $("#numberadd").on("click", function(event){
 	var gotNumber = $("#number").val().trim();
 	$("#numbershow").text(gotNumber);
 
-			
+//capture logged in user and numbers entered
+	currentUser = $("#loggedinuser").val().trim();
+	addNumber = $("#number").val().trim();
+
+	database.ref().push({
+	User: email,
+	number: addNumber				
+	});
+});
+
+database.ref().on("value", function(snapshot) {
+	  console.log(snapshot.val());
+      console.log(snapshot.val().User);
+      console.log(snapshot.val().number);
+}, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
 });
