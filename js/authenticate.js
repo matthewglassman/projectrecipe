@@ -42,6 +42,7 @@ $("#login").on("click", function(event){
 //Log Out functionality
 $("#logout").on("click", function(event){
 	firebase.auth().signOut();
+	//$("#numbershow").clear();
 });
 
 //Add Sign Up Event
@@ -101,28 +102,32 @@ firebase.auth().onAuthStateChanged(function(firebaseUser){
 	
 		email = firebaseUser.email;
 		console.log(email);
-		email.show();
+		$("#loggedinuser").show();
 		$("#logout").show();
 		$("#numbertest").show();
 		$("#signup").hide();
 		$("#login").hide();
 		$("#email").hide();
 		$("#password").hide();
+		$("#loggedinuser").html(email);
 	} else {
 		console.log('not logged in');
 		$("#logout").hide();
 		$("#numbertest").hide();
+		$("#numbertest").clear();
 		$("#signup").show();
 		$("#login").show();
 		$("#email").show();
 		$("#password").show();
+		$("#loggedinuser").hide();
+		$("#numbershow").hide();
 	}
 });
 
 $("#numberadd").on("click", function(event){
 	event.preventDefault();
 	var gotNumber = $("#number").val().trim();
-	$("#numbershow").append(gotNumber);
+	$("#numbershow").text(gotNumber);
 
 			
 });
