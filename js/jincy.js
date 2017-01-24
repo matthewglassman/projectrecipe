@@ -119,7 +119,7 @@ function createRecipeCards(){
         html += styleIngredients(value.usedIngredArray, "used");
         html += styleIngredients(value.missedIngredArray, "missed");
         html += "</ul>";
-        html += "<p class = 'readymin'> Ready in " + value.readyMins + "minutes </p>";
+        html += "<p class = 'readymin'> Ready in " + value.readyMins + " minutes </p>";
         html += "<div id='recipe-source'><p><a href=" +  value.recipeURL + " target='_blank'>Get the recipe</a></p></div>";
         html += "</div></div></div></div>";
         html += "<div class='card-action'>";

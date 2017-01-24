@@ -90,11 +90,10 @@ margin-top: 100px;
     background-size: cover;
 } */
 
-}
+
 .ch-info h3 ,
 .ch-info h5{
 	color: #fff;
-	xtext-transform: uppercase;
 	letter-spacing: 2px;
 	font-size: 20px;
 	margin: 0 15px;
@@ -108,9 +107,9 @@ margin-top: 100px;
 .ch-info ul{
   color: #fff !important;
   font-size: 14px;
+  line-height: 1.5;
   font-weight: 400;
-	margin: 0 15px 0px;
-  xpadding-top: 2px;
+margin: 0 15px 0px;
   font-family: 'Open Sans', Arial, sans-serif;
 }
 
@@ -120,7 +119,6 @@ margin-top: 100px;
 	font-style: italic;
 	margin: 0 30px;
 	font-size: 12px;
-	xborder-top: 1px solid rgba(255,255,255,0.5);
 }
 
 .ch-info p a {
@@ -130,20 +128,18 @@ margin-top: 100px;
 	font-weight: 700;
 	text-transform: uppercase;
   text-align: right;
+  padding-right: 21px;
 	font-size: 12px;
 	letter-spacing: 1px;
 	padding-top: 4px;
 	font-family: 'Open Sans', Arial, sans-serif;
 }
 p.readymin {
-	color: #fff;
-  font-size: 15px;
+	color: #fff !important;
+    font-size: 15px;
 	padding-top: 20px;
 	font-style: italic;
-	xmargin: 0 30px;
-	xborder-top: 1px solid rgba(255,255,255,0.5);
-	xopacity: 0;
-	xtransition: all 1s ease-in-out 0.4s;
+	padding: 20px 50px 0px;
 }
 .ch-info p a:hover {
 	color: rgba(255,242,34, 0.8);
