@@ -1,3 +1,17 @@
+
+
+
+*{
+	box-sizing: border-box;
+}
+div{
+	/* outline-style: dotted;
+	outline-color: orange;
+	margin: 2px;  */
+}
+#recipeBank{
+	padding-top: 15px;
+}
 /*
 div{
     outline-style: dotted;
@@ -56,6 +70,7 @@ h3 {
 }
 /*Tabs for Recipes, Videos, and Saved Recipes*/
 
+
 #videoBank{
   margin-top: 10px;
   text-align: center;
@@ -86,6 +101,7 @@ margin-top: 100px;
 border-radius: 3px;
 
 }*/
+
 
 
 
