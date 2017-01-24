@@ -37,12 +37,12 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a class="waves-effect pink darken-4 btn modal-trigger" href="#modal1">Login</a></li>
-        <li><a href="#saved">My Saved Recipes</a></li>
+        <li><a href="#userSavedRecipes">My Saved Recipes</a></li>
       </ul>
 
       <ul class="side-nav" id="mobile-demo">
         <li><a class="waves-effect pink darken-4 btn modal-trigger" href="#modal1" id="login">Login</a></li>
-        <li><a href="#saved">My Saved Recipes</a></li>
+        <li><a href="#userSavedRecipes">My Saved Recipes</a></li>
       </ul>
 
     </div>
@@ -119,7 +119,8 @@
 
               <input id="numOfRecipes" type="text" class="white-text" size="1" maxlength="2" placeholder="How Many Recipes?">
 
-              <button class="waves-effect pink darken-4 btn-large" type="submit" name="action" id="find-recipe">Let's get cooking!</button>
+              <button class="waves-effect pink darken-4 btn-large" type="submit" name="action" id="find-recipe">Let's get cooking!</button> 
+              
               <!-- <i class="material-icons right">send</i> -->
               <!-- </div> --><!--End of col12-->
               <!-- </div> --><!--End of row-->
@@ -146,16 +147,14 @@
     <div class="col s12 m12 l12">
       <ul class="tabs">
         <li class="tab col s4 m4 l4"><a class="active" href="#recipeBank">Recipes</a></li>
-        <li class="tab col s4 m4 l4"><a class="active" href="#videoBank">Videos</a></li>
-        <li class="tab col s4 m4 l4"><a class="active" id="saved" href="#userSavedRecipes">My Saved Recipes</a></li>
+        <li class="tab col s4 m4 l4"><a href="#videoBank">Videos</a></li>
+        <li class="tab col s4 m4 l4"><a id="saved" href="#userSavedRecipes">My Saved Recipes</a></li>
       </ul>
     </div><!--End of col12-->
 
-    <div id="recipeBank" class="col s12 m12 l12"></div>
+    <div id="recipeBank" class="col s12 m12 l12"><div id = "recipes-container" class = "row"></div></div>
     <div id="videoBank" class="col s12 m12 l12"></div>
     <div id="userSavedRecipes" class="col s12 m12 l12"></div>
-
-
 
   </div><!--End of row-->
 </div> <!--End of container-->
@@ -180,6 +179,7 @@
   <script type="text/javascript" src="js/materialize.js"></script>
   <script type="text/javascript" src="js/jquery.flexdatalist.js"> </script>
   <script type="text/javascript" src="js/jamie.js"> </script>
+  <script type="text/javascript" src="js/jincy.js"> </script>
 
 
 </body>
