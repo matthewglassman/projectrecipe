@@ -58,7 +58,7 @@ margin-top: 100px;
 	transition: all 0.4s ease-in-out;
 	xtop: 20px;
 	xleft: 20px;
-	background: #f9f9f9 url(../images/bg.jpg);
+	background: #f9f9f9 url(https://dummyimage.com/600x400/fff/fff);
 	box-shadow: 
 		0 0 0 20px rgba(255,255,255,0.2), 
 		inset 0 0 3px rgba(115,114, 23, 0.8);
@@ -85,17 +85,11 @@ margin-top: 100px;
 	transform: rotate3d(0,1,0,180deg);
 	background: #000;
 }
-.ch-img-1 { 
-	background-image: url(https://spoonacular.com/recipeImages/Crispy-Lemon-Fried-Chicken-443487.jpg);
+/* .ch-img-1 { 
+	xbackground-image: url(https://spoonacular.com/recipeImages/Crispy-Lemon-Fried-Chicken-443487.jpg);
     background-size: cover;
-}
+} */
 
-.ch-img-2 { 
-	background-image: url(../images/11.jpg);
-}
-
-.ch-img-3 { 
-	background-image: url(../images/12.jpg);
 }
 .ch-info h3 ,
 .ch-info h5{
@@ -112,7 +106,7 @@ margin-top: 100px;
 		0 1px 2px rgba(0,0,0,0.3);
 }
 .ch-info ul{
-  color: #fff;
+  color: #fff !important;
   font-size: 14px;
   font-weight: 400;
 	margin: 0 15px 0px;
@@ -184,7 +178,7 @@ span.missed {
     background-color: #954343;
     xfont-weight: 900;
 }
-span.highlight {
+span.used {
     background-color: #4f880e;
 }
 

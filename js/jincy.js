@@ -80,12 +80,61 @@ function extractRecipeInfo(){
         }
 }
 
+//This function returns an html <li> element  based on the input arguments array and span
+function styleIngredients(inputArr, spanVal){
+    var html = "";
+
+    for(i=0; i<inputArr.length; i++){
+        html += "<li>" + inputArr[i].amount + " " + inputArr[i].unit + " " + "<span class=" + spanVal + ">" + inputArr[i].name + "</span> </li>";
+    }
+    return html;
+
+}
+
 //This function creates recipe cards for each recipe in the recipe results array
 function createRecipeCards(){
+    //clear the recipes-container
+    $("#recipes-container").empty();
 
     $.each(recipeResultArray, function( index,   value ) {
 
+        var imgClass = "ch-img-" + index;
+        var card_content_ID = "card-content" + index;
+        var ch_item_ID = "ch-item" + index;
+        var ch_info_front_ID = "ch-info-front" + index;
 
+        var html = "<div class = 'col s12 m6 l4'>" ;
+        html += "<div class='card'>";
+        html += "<div class='card-content'" + "id=" + card_content_ID +  ">";
+        html += "<div class='ch-item'" + "id=" + ch_item_ID + ">";
+        /*html += "<div class='card-content " + imgClass + "'>";
+        html += "<div class='ch-item " + imgClass + ">";*/
+        html += "<div class='ch-info-wrap'>";
+        html += "<div class='ch-info'>";
+        html += "<div class='ch-info-front'" + "id=" + ch_info_front_ID +"></div>";
+        /*html += "<div class='ch-info-front " + imgClass + "'></div>";*/
+        html += "<div class='ch-info-back'>";
+        html += "<h5>Ingredients: </h5>";
+        html += "<ul>";
+        html += styleIngredients(value.usedIngredArray, "used");
+        html += styleIngredients(value.missedIngredArray, "missed");
+        html += "</ul>";
+        html += "<p class = 'readymin'> Ready in " + value.readyMins + "minutes </p>";
+        html += "<div id='recipe-source'><p><a href=" +  value.recipeURL + " target='_blank'>Get the recipe</a></p></div>";
+        html += "</div></div></div></div>";
+        html += "<div class='card-action'>";
+        html += "<span class='card-title'>" + value.recipeTitle + "</span>";
+        html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
+        html += "<div class = 'save-recipe'><a class='waves-effect green btn-flat' data-recipeTitle = " + value.recipeTitle + " data-recipeURL = " +  value.recipeURL + ">+ SAVE RECIPE</a></div>";
+        html += "</div></div></div></div>";
+        $('.' + imgClass).css({
+                            'background-image': 'url(' + value.imageURL + ')',
+                            'background-size' : 'cover'
+                            });
+        $("div#" + ch_item_ID).addClass(imgClass);
+        $("div#" + card_content_ID).addClass(imgClass);
+        $("div#" + ch_info_front_ID).addClass(imgClass);
+        $("#recipes-container").append(html);
 
         //Logging
         console.log("recipeTitle: " + value.recipeTitle);
@@ -108,19 +157,19 @@ function createRecipeCards(){
 //Add Ingredients to Ingredient Array
 function addIngredients(inputArray){
     var ingredArray = [];
-    var ingredObject = {
+
+    for (var i = 0, j = inputArray.length; i < j; i++) {
+         var ingredObject = {
                         amount: 0,
                         unit: "",
                         name: ""
-    };
-
-    for (var i = 0, j = inputArray.length; i < j; i++) {
+          };
         //Add check for undefined
             ingredObject.amount = inputArray[i].amount.toFixed(1);
             ingredObject.unit = inputArray[i].unitLong;
             ingredObject.name = inputArray[i].name;
 
-            //ingredArray[i] = inputArray[i].amount + inputArray[i].unitLong + " " + inputArray[i].name;
+            console.log(i + ": " + ingredObject.amount + ingredObject.unit + " " + ingredObject.name);
             //Push ingedObject to ingredArray
             ingredArray.push(ingredObject);
     }
