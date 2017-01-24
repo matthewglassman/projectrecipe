@@ -7,6 +7,22 @@ var recipeResultArray = [];
 var recipeCount = 10;
 var search_ingredients = "oranges%2Cflour%2Cchicken";
 
+// Initialize Firebase
+ var config = {
+   apiKey: "AIzaSyBU2qGBrMCbhsoy2rx5jd-EJP4CBw6LJqU",
+   authDomain: "projectrecipe-50fac.firebaseapp.com",
+   databaseURL: "https://projectrecipe-50fac.firebaseio.com",
+   storageBucket: "projectrecipe-50fac.appspot.com",
+   messagingSenderId: "312276130376"
+ };
+ firebase.initializeApp(config);
+
+ // Create a variable to reference the database
+var databaseRef = firebase.database();
+
+//create a reference to root of the database and also create a child called 'users' to store user details
+var usersRef = firebase.database().ref().child('users');
+
 //--------------------------------------------------------------------------------------
 //-----------------------------FUNCTIONS------------------------------------------------
 
@@ -99,15 +115,11 @@ function createRecipeCards(){
     $.each(recipeResultArray, function( index,   value ) {
 
         var imgClass = "ch-img-" + index;
-        var card_content_ID = "card-content" + index;
-        var ch_item_ID = "ch-item" + index;
-        var ch_info_front_ID = "ch-info-front" + index;
 
         var html = "<div class = 'col s12 m6 l6'>" ;
         html += "<div class='card'>";
-       /* html += "<div class='card-content " + card_content_ID +  ">";
-        html += "<div class='ch-item'" + "id=" + ch_item_ID + ">";*/
-        html += "<div class='card-content " + imgClass + "'>";
+        html += "<div class='card-content'>";
+       /* html += "<div class='card-content " + imgClass + "'>";*/
         html += "<div class='ch-item " + imgClass + "'>"
         html += "<div class='ch-info-wrap'>";
         html += "<div class='ch-info'>";
@@ -190,17 +202,52 @@ function addIngredients(inputArray){
 //--------------------------MAIN PROCESS------------------------------------------------
 
 $(document).ready(function(){
-      $('.slider').slider({full_width: true});
-    });
 
-// Pause slider
-$('.slider').slider('pause');
-// Start slider
-$('.slider').slider('start');
-// Next slide
-$('.slider').slider('next');
-// Previous slide
-$('.slider').slider('prev');
+    var userArray = ["jincy", "jamie", "mathew", "kathleen"];
+    var recipeInfoArray1 = [
+                            {recTitle: "recipe1", recURL: "recipeURL1"},
+                            {recTitle: "recipe2", recURL: "recipeURL2"},
+                            {recTitle: "recipe3", recURL: "recipeURL3"},
+    ];
+    var recipeInfoArray2 = [
+                            {recTitle: "recipe1", recURL: "recipeURL1"},
+                            {recTitle: "recipe2", recURL: "recipeURL2"},
+                            {recTitle: "recipe3", recURL: "recipeURL3"},
+    ];
+
+    var recipeInfoArray3 = [
+                            {recTitle: "recipe1", recURL: "recipeURL1"},
+                            {recTitle: "recipe2", recURL: "recipeURL2"},
+                            {recTitle: "recipe3", recURL: "recipeURL3"},
+    ];
+    var recipeInfoArray4 = [
+                            {recTitle: "recipe1", recURL: "recipeURL1"},
+                            {recTitle: "recipe2", recURL: "recipeURL2"},
+                            {recTitle: "recipe3", recURL: "recipeURL3"},
+    ];
+
+    console.log("Write to database");
+
+    for(i=0; i<userArray.length; i++){
+
+        var myUser = usersRef.child(userArray[i]);
+        myUser.set({
+                userName: userArray[i],
+                savedRecipes: recipeInfoArray1
+        });
+
+    }
+
+    //Fetch the saved recipes for the specific user
+    var searchUser = "jincy";
+    databaseRef.ref().orderByChild('users').equalTo('jincy').once("value", function(snapshot){
+        console.log(snapshot.val());
+    });
+    
+      
+
+});
+
 
 //-------------------------------------------------
 
