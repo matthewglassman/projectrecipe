@@ -103,16 +103,16 @@ function createRecipeCards(){
         var ch_item_ID = "ch-item" + index;
         var ch_info_front_ID = "ch-info-front" + index;
 
-        var html = "<div class = 'col s12 m6 l4'>" ;
+        var html = "<div class = 'col s12 m6 l6'>" ;
         html += "<div class='card'>";
-        html += "<div class='card-content'" + "id=" + card_content_ID +  ">";
-        html += "<div class='ch-item'" + "id=" + ch_item_ID + ">";
-        /*html += "<div class='card-content " + imgClass + "'>";
-        html += "<div class='ch-item " + imgClass + ">";*/
+       /* html += "<div class='card-content " + card_content_ID +  ">";
+        html += "<div class='ch-item'" + "id=" + ch_item_ID + ">";*/
+        html += "<div class='card-content " + imgClass + "'>";
+        html += "<div class='ch-item " + imgClass + "'>"
         html += "<div class='ch-info-wrap'>";
         html += "<div class='ch-info'>";
-        html += "<div class='ch-info-front'" + "id=" + ch_info_front_ID +"></div>";
-        /*html += "<div class='ch-info-front " + imgClass + "'></div>";*/
+        /*html += "<div class='ch-info-front'" + "id=" + ch_info_front_ID +"></div>";*/
+        html += "<div class='ch-info-front " + imgClass + "'></div>";
         html += "<div class='ch-info-back'>";
         html += "<h5>Ingredients: </h5>";
         html += "<ul>";
@@ -125,16 +125,18 @@ function createRecipeCards(){
         html += "<div class='card-action'>";
         html += "<span class='card-title'>" + value.recipeTitle + "</span>";
         html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
-        html += "<div class = 'save-recipe'><a class='waves-effect green btn-flat' data-recipeTitle = " + value.recipeTitle + " data-recipeURL = " +  value.recipeURL + ">+ SAVE RECIPE</a></div>";
+        html += "<div class = 'save-recipe'><a class='waves-effect green btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "'>+ SAVE</a></div>";
         html += "</div></div></div></div>";
+
+        /*$("div#" + ch_item_ID).addClass(imgClass);
+        $("div#" + card_content_ID).addClass(imgClass);
+        $("div#" + ch_info_front_ID).addClass(imgClass);*/
+        console.log(html);
+        $("#recipes-container").append(html);
         $('.' + imgClass).css({
                             'background-image': 'url(' + value.imageURL + ')',
                             'background-size' : 'cover'
                             });
-        $("div#" + ch_item_ID).addClass(imgClass);
-        $("div#" + card_content_ID).addClass(imgClass);
-        $("div#" + ch_info_front_ID).addClass(imgClass);
-        $("#recipes-container").append(html);
 
         //Logging
         console.log("recipeTitle: " + value.recipeTitle);
