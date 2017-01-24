@@ -102,7 +102,7 @@
         <!--       <div class="row">
               <div class="col s12"> -->
 
-              <input type='text'
+   <!--            <input type='text'
                  placeholder="Type in your ingredients..."
                  class="flexdatalist white-text"
                  data-data="ingredients.json"
@@ -113,14 +113,34 @@
                  data-text-property="{name}"
                  data-min-length="1"
                  multiple="multiple"
-                 name="ingredient_id">
+                 name="ingredient_id"> -->
+
+                <input type="text"
+                       placeholder= "Type in your ingredients..."
+                       class="flexdatalist white-text"
+                       data-min-length="1"
+                       multiple="multiple"
+                       list="ingredients"
+                       name="ingredients"
+                       id="ingredientsInput">
+
+                <datalist id="ingredients">
+                    <option value="zucchini">zucchini</option>
+                    <option value="cheese">cheese</option>
+                    <option value="pasta">pasta</option>
+                    <option value="tomatoes">tomatoes</option>
+                    <option value="bread">bread</option>
+                    <option value="milk">milk</option>
+                    <option value="shrimp">shrimp</option>
+                    <option value="chicken">chicken</option>
+                </datalist>
 
 
 
               <input id="numOfRecipes" type="text" class="white-text" size="1" maxlength="2" placeholder="How Many Recipes?">
 
-              <button class="waves-effect pink darken-4 btn-large" type="submit" name="action" id="find-recipe">Let's get cooking!</button> 
-              
+              <button class="waves-effect pink darken-4 btn-large" type="submit" name="action" id="find-recipe">Let's get cooking!</button>
+
               <!-- <i class="material-icons right">send</i> -->
               <!-- </div> --><!--End of col12-->
               <!-- </div> --><!--End of row-->
