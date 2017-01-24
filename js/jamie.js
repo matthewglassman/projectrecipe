@@ -1,3 +1,7 @@
+var searchParameters;
+
+var searchYouTube;
+
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
@@ -9,13 +13,10 @@
 
 function populateYouTubeVideos(){
 
-//This variable will be a string that is pulled from flexdatalist and will be used to generate videos and recipes.
-var searchYouTube = "zucchini, cheese, beef";
-
 //This variable will be user input based on the number of videos they want to search for.
 var numRecipesToReturn = "10";
 
- var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchYouTube+"&type=video&order=relevance&maxResults="+numRecipesToReturn+"&key=AIzaSyBpu8hgnXbkqFVWrAvwRUEz7T13ii3I7WM";
+ var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchParameters+"&type=video&order=relevance&maxResults="+numRecipesToReturn+"&key=AIzaSyBpu8hgnXbkqFVWrAvwRUEz7T13ii3I7WM";
       console.log(searchYouTube);
       console.log(queryURL);
 
@@ -33,7 +34,7 @@ var numRecipesToReturn = "10";
           var videoId = results[i].id.videoId;
           console.log(videoId);
 
-          var videoSRC = "http://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=http://example.com";
+          var videoSRC = "https://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=http://example.com";
 
           var iFrameDiv = $("<div>");
           iFrameDiv.attr("class", "video-container")
@@ -57,4 +58,20 @@ var numRecipesToReturn = "10";
 });
 }
 
-// populateYouTubeVideos();
+
+
+
+//Flexdatalist//
+
+$('.flexdatalist').flexdatalist({
+     minLength: 1
+});
+
+//On-click of "Let's get cooking!" button, the search parameters from flexdatalist are captured.
+$("#find-recipe").on("click", function(){
+  searchParameters = $("#ingredientsInput").val();
+  console.log(searchParameters);
+
+  populateYouTubeVideos();
+
+});
