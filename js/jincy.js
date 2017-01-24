@@ -85,6 +85,9 @@ function createRecipeCards(){
 
     $.each(recipeResultArray, function( index,   value ) {
 
+
+
+        //Logging
         console.log("recipeTitle: " + value.recipeTitle);
         console.log("readyMins: " + value.readyMins);
         console.log("creditText: " + value.creditText);
@@ -217,6 +220,13 @@ $("#find-recipe").on("click", function(event) {
         }
     });
 
+});
+
+//When save recipe button is clicked, notify the user and save recipe to the databse
+$("#recipes-container").on("click",".save-recipe", function(event){
+   // Materialize.toast(message, displayLength, className, completeCallback);
+    Materialize.toast('Recipe saved!', 3000);
+  
 });
 
 
