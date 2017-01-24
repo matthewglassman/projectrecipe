@@ -1,24 +1,21 @@
-//Functionality for sliding images at top of page
-$(document).ready(function(){
-      $('.slider').slider({full_width: true});
-    });
-
-// Pause slider
-$('.slider').slider('pause');
-// Start slider
-$('.slider').slider('start');
-// Next slide
-$('.slider').slider('next');
-// Previous slide
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+    $(".button-collapse").sideNav();
+  });
 
 
 //Pulling data from youTube and populating page with videos
 
 function populateYouTubeVideos(){
 
+//This variable will be a string that is pulled from flexdatalist and will be used to generate videos and recipes.
 var searchYouTube = "zucchini, cheese, beef";
 
- var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchYouTube+"&type=video&order=relevance&maxResults=10&key=AIzaSyBpu8hgnXbkqFVWrAvwRUEz7T13ii3I7WM";
+//This variable will be user input based on the number of videos they want to search for.
+var numRecipesToReturn = "10";
+
+ var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchYouTube+"&type=video&order=relevance&maxResults="+numRecipesToReturn+"&key=AIzaSyBpu8hgnXbkqFVWrAvwRUEz7T13ii3I7WM";
       console.log(searchYouTube);
       console.log(queryURL);
 
@@ -39,7 +36,9 @@ var searchYouTube = "zucchini, cheese, beef";
           var videoSRC = "http://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=http://example.com";
 
           var iFrameDiv = $("<div>");
-          iFrameDiv.attr("class", "container col s6");
+          iFrameDiv.attr("class", "video-container")
+          ;
+          iFrameDiv.attr("id","iFrameDiv");
 
           var iFrame = $("<iframe></iframe>");
           iFrame.attr("type", "text/html");
@@ -58,4 +57,4 @@ var searchYouTube = "zucchini, cheese, beef";
 });
 }
 
-populateYouTubeVideos();
+// populateYouTubeVideos();
