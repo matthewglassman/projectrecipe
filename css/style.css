@@ -1,5 +1,6 @@
 
 
+
 *{
 	box-sizing: border-box;
 }
@@ -11,31 +12,106 @@ div{
 #recipeBank{
 	padding-top: 15px;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> e7ffcf9417b7aa5c21671a3fa7a5021cd96c0c0f
-#videoBank{
-  margin-top: 20px;
-  text-align: center;
+/*
+div{
+    outline-style: dotted;
+    outline-color: orange;
+    margin: 2px;
+}*/
+
+/*Navigation and Modal*/
+.brand-logo{
+  font-family: 'Rock Salt', cursive;
 }
 
-#recipeVideo{
-
+#usernameInput.input-field{
+  width: 350px;
 }
 
-#loginBox{
-margin-left: 100px;
-margin-top: 100px;
-  border-radius: 3px;
-
+#usernameInput{
+  width: 500px;
 }
 
 #loginButton{
   color: white;
 }
 
-<<<<<<< HEAD
+/*Main Container w/ Background Image*/
+
+#mainImage{
+  background-image: url("../images/food-salad-healthy-vegetables.jpg");
+  max-width: 100%;
+  height: 1050px;
+  background-size: cover;
+}
+
+/*Ingredient Input*/
+
+h3 {
+  color: white;
+  font-family: 'Rock Salt', cursive;
+  margin-top: 0px;
+}
+
+#submitBtn{
+  font-size: 10px;
+  word-wrap: break-word;
+}
+
+#ingredientInput{
+  position: static;
+  right: 60px;
+  bottom: 10px;
+  padding-top: 0px;
+}
+
+#numOfRecipes{
+  width: 53%;
+}
+/*Tabs for Recipes, Videos, and Saved Recipes*/
+
+
+>>>>>>> master
+#videoBank{
+  margin-top: 10px;
+  text-align: center;
+}
+
+#iFrameDiv{
+  border-color: red;
+  border: 15px;
+}
+
+#recipeVideo{
+margin-top: 15px;
+margin-bottom: 15px;
+
+}
+
+.tabs .tab a{
+    color: #880e4f !important;
+}
+
+.tabs .indicator {
+    background-color: #880e4f !important;
+}
+
+/*#loginBox{
+margin-left: 100px;
+margin-top: 100px;
+border-radius: 3px;
+
+}*/
+
+
+
+
+
+
+
+
+
 /* ---------Style for card panels with animation------------------ */
 
 
@@ -183,6 +259,4 @@ span.used {
 }
 
 /* -----------------------------------------------------------------------*/
-=======
 
->>>>>>> e7ffcf9417b7aa5c21671a3fa7a5021cd96c0c0f
