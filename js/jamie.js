@@ -64,11 +64,11 @@ function populateYouTubeVideos(){
 }
 //Capture Username From User Input//
 
-$("#modalLogin").on("click", function(event){
+$("#user-login").on("click", function(event){
     event.preventDefault();
 
   usernameEntered = $(".unEntered").val().trim();
-  $("#displayMember").append(usernameEntered);
+  // $("#displayMember").append(usernameEntered);
 
 
 
