@@ -71,14 +71,14 @@ $("#ingredientsInput").flexdatalist({
 
 //On-click of "Let's get cooking!" button, the search parameters from flexdatalist are captured. Cleared out because we do not want to waster YouTube API calls!!
 
-// $("#find-recipe").on("click", function(event){
-//   event.preventDefault();
-//   searchParameters = $("[name=ingredients]").val();
-//   console.log(searchParameters);
+$("#find-recipe").on("click", function(event){
+  event.preventDefault();
+  searchParameters = $("[name=ingredients]").val();
+  console.log(searchParameters);
 
-//   numRecipesToReturn= $("#numOfRecipes").val();
-//   console.log(numRecipesToReturn);
+  numRecipesToReturn= $("#numOfRecipes").val();
+  console.log(numRecipesToReturn);
 
 //   populateYouTubeVideos();
 
-// });
+});
