@@ -250,8 +250,8 @@ $(document).ready(function(){
     databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
         //usersRef.orderByChild('jincy').once("value", function(snapshot){
         console.log(snapshot.val());
-        
-        console.log(snapshot.val().jincy.savedRecipes);
+
+        console.log(snapshot.child(searchUser).val().savedRecipes);
     });
     
       
