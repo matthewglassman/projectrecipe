@@ -4,6 +4,9 @@ var searchParameters;
 //This variable will be user input based on the number of videos they want to search for.
 var numRecipesToReturn;
 
+//This variable will be the username entered by the user in the modal.
+var usernameEntered;
+
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
@@ -59,8 +62,17 @@ function populateYouTubeVideos(){
 
 });
 }
+//Capture Username From User Input//
+
+$("#modalLogin").on("click", function(event){
+    event.preventDefault();
+
+  usernameEntered = $(".unEntered").val().trim();
+  $("#displayMember").append(usernameEntered);
 
 
+
+});
 
 
 //Flexdatalist//
