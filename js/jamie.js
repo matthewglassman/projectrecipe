@@ -1,6 +1,8 @@
+//This variable will be used to store the search parameters from the flexdatalist.
 var searchParameters;
 
-var searchYouTube;
+//This variable will be user input based on the number of videos they want to search for.
+var numRecipesToReturn;
 
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
@@ -14,10 +16,10 @@ var searchYouTube;
 function populateYouTubeVideos(){
 
 //This variable will be user input based on the number of videos they want to search for.
-var numRecipesToReturn = "10";
+// var numRecipesToReturn = "10";
 
- var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchParameters+"&type=video&order=relevance&maxResults="+numRecipesToReturn+"&key=AIzaSyBpu8hgnXbkqFVWrAvwRUEz7T13ii3I7WM";
-      console.log(searchYouTube);
+ var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchParameters+"&type=video&order=relevance&maxResults="+numRecipesToReturn+"&key=AIzaSyB5ewohlv82vxqUvMYZCS_htMbXO_U66K8";
+      // console.log(searchYouTube);
       console.log(queryURL);
 
       $.ajax({
@@ -29,12 +31,12 @@ var numRecipesToReturn = "10";
         var results = response.items;
         console.log(results);
 
-        for(var i = 0; i < 10; i++){
+        for(var i = 0; i < numRecipesToReturn; i++){
 
           var videoId = results[i].id.videoId;
           console.log(videoId);
 
-          var videoSRC = "https://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=http://example.com";
+          var videoSRC = "http://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=http://example.com";
 
           var iFrameDiv = $("<div>");
           iFrameDiv.attr("class", "video-container")
@@ -63,15 +65,20 @@ var numRecipesToReturn = "10";
 
 //Flexdatalist//
 
-$('.flexdatalist').flexdatalist({
+$("#ingredientsInput").flexdatalist({
      minLength: 1
 });
 
-//On-click of "Let's get cooking!" button, the search parameters from flexdatalist are captured.
-$("#find-recipe").on("click", function(){
-  searchParameters = $("#ingredientsInput").val();
-  console.log(searchParameters);
+//On-click of "Let's get cooking!" button, the search parameters from flexdatalist are captured. Cleared out because we do not want to waster YouTube API calls!!
 
-  populateYouTubeVideos();
+// $("#find-recipe").on("click", function(event){
+//   event.preventDefault();
+//   searchParameters = $("[name=ingredients]").val();
+//   console.log(searchParameters);
 
-});
+//   numRecipesToReturn= $("#numOfRecipes").val();
+//   console.log(numRecipesToReturn);
+
+//   populateYouTubeVideos();
+
+// });
