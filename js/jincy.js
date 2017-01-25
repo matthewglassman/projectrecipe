@@ -6,6 +6,7 @@ var recipeResults = [];
 var recipeResultArray = [];
 var recipeCount = 10;
 var search_ingredients = "oranges%2Cflour%2Cchicken";
+var current_user = "";
 
 // Initialize Firebase
  var config = {
@@ -201,6 +202,8 @@ function addIngredients(inputArray){
 //--------------------------------------------------------------------------------------
 //--------------------------MAIN PROCESS------------------------------------------------
 
+//------------------------ON DOCUMENT LOAD----------------------------------------------
+
 $(document).ready(function(){
 
     var userArray = ["jincy", "jamie", "mathew", "kathleen"];
@@ -258,10 +261,16 @@ $(document).ready(function(){
 
 });
 
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------LOGIN - ON CLICK -------------------------------------------
+$("#user-login").on("click", function(event){
+    
+})
 
-//-------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------Spoonacular API call----------------------------------------
 
-//Spoonacular API call
+
 // This .on("click") function will trigger the AJAX Call
 $("#find-recipe").on("click", function(event) {
 
