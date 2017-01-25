@@ -53,6 +53,14 @@ h3 {
   font-family: 'Rock Salt', cursive;
   margin-top: 0px;
 }
+h4 {
+  color: white;
+  font-family: 'Rock Salt', cursive;
+  margin-top: 0px;
+  line-height: 1.6;
+}
+#ingredientInput p {
+	color:white;
 
 #submitBtn{
   font-size: 10px;
