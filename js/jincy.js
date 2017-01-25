@@ -137,7 +137,7 @@ function createRecipeCards(){
         html += "<div class='card-action'>";
         html += "<span class='card-title'>" + value.recipeTitle + "</span>";
         html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
-        html += "<div class = 'save-recipe'><a class='waves-effect green btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "'>+ SAVE</a></div>";
+        html += "<div class = 'save-recipe'><a class='waves-effect pink darken-4 btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "'>+ SAVE</a></div>";
         html += "</div></div></div></div>";
 
         /*$("div#" + ch_item_ID).addClass(imgClass);
@@ -226,6 +226,13 @@ $(document).ready(function(){
                             {recTitle: "recipe3", recURL: "recipeURL3"},
     ];
 
+    var userInfoArray = [
+                    {userName: "jincy", savedRecipes: recipeInfoArray1},
+                    {userName: "jamie", savedRecipes: recipeInfoArray2},
+                    {userName: "mathew", savedRecipes: recipeInfoArray3},
+                    {userName: "kathleen", savedRecipes: recipeInfoArray4}
+    ];
+
     console.log("Write to database");
 
     for(i=0; i<userArray.length; i++){
@@ -240,8 +247,11 @@ $(document).ready(function(){
 
     //Fetch the saved recipes for the specific user
     var searchUser = "jincy";
-    databaseRef.ref().orderByChild('users').equalTo('jincy').once("value", function(snapshot){
+    databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
+        //usersRef.orderByChild('jincy').once("value", function(snapshot){
         console.log(snapshot.val());
+        
+        console.log(snapshot.val().jincy.savedRecipes);
     });
     
       
