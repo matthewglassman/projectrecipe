@@ -200,6 +200,29 @@ function addIngredients(inputArray){
     return ingredArray;
 }
 
+// Create html for saved recipe cards
+function createSavedRecipeCards(recipeInfo){
+
+    console.log(recipeInfo);
+
+    var img = "http://lorempixel.com/100/190/nature/6";
+
+    var html = "<div class='col s12 m6 l6'>";
+
+    html += "<div class='card horizontal' id='savedCard'>";
+    html += "<div class='card-image'>";
+    html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
+    html += "<div class='card-stacked'>";
+    html += "<div class='card-content' id = 'savedCard-panel'>";
+    html += "<h5><a href='" + recipeInfo.recURL + "' target='_blank' class ='black-text'>" + recipeInfo.recTitle + "</a></h5></div>";
+    html += "</div></div></div>";
+     
+    console.log(html);
+
+return html;
+
+} 
+
 // This function pulls saved recipes from database for the logged in user and write it to the saved recipes tab
 function getSavedRecipes(currUser){
 
@@ -218,19 +241,7 @@ function getSavedRecipes(currUser){
         //Loop through the array and generate html for each recipe
         for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
 
-            var img = "http://lorempixel.com/100/190/nature/6";
-
-            var html = "<div class='col s12 m6 l6'>";
-
-            html += "<div class='card horizontal' id='savedCard'>";
-            html += "<div class='card-image'>";
-            html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
-            html += "<div class='card-stacked'>";
-            html += "<div class='card-content' id = 'savedCard-panel'>";
-            html += "<h5><a href='" + arrSavedRecipes[i].recURL + "' target='_blank'>" + arrSavedRecipes[i].recTitle + "</a></h5></div>";
-            html += "</div></div></div>";
-             
-            console.log(html);
+            var html = createSavedRecipeCards(arrSavedRecipes[i]);
 
             $("#savedRecipes-container").append(html);
 
@@ -316,8 +327,6 @@ $(document).ready( function(){
                 savedRecipes: savedRecipeArray
         });
 
-
-
     });
 
       
@@ -325,24 +334,28 @@ $(document).ready( function(){
 });
 
 //----------------------------------------------------------------------------------------------------
-//----------------------------------------LOGIN - ON CLICK -------------------------------------------
+//----------------------------------------LOAD NEW SAVED RECIPES--------------------------------------
 //Capture Username From User Input and also load the saved recipes from the database//
 
 $("#user-login").on("click", function(event){
 
     event.preventDefault();
 
-    usernameEntered = $(".unEntered").val().trim();
+    current_user = $(".unEntered").val().trim();
 
     //Check if user exists in database, If not display an error and ask to login again
 
     //Display username along with "What's in your Pantry"
-    $("#displayMember").html(", "+ usernameEntered);
+    $("#displayMember").html(", "+ current_user);
 
     // Pull saved recipes from database for the logged in user and write it to the saved recipes tab
-    getSavedRecipes(usernameEntered);
+    getSavedRecipes(current_user);
 
 });
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------LOGIN - ON CLICK -------------------------------------------
+//Capture Username From User Input and also load the saved recipes from the database//
 
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------Spoonacular API call----------------------------------------
