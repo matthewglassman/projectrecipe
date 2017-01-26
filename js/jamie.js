@@ -68,7 +68,7 @@ $("#user-login").on("click", function(event){
     event.preventDefault();
 
   usernameEntered = $(".unEntered").val().trim();
-  // $("#displayMember").append(usernameEntered);
+  $("#displayMember").html(", "+usernameEntered);
 
 
 
