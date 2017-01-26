@@ -4,6 +4,9 @@ var searchParameters;
 //This variable will be user input based on the number of videos they want to search for.
 var numRecipesToReturn;
 
+//This variable will be the username entered by the user in the modal.
+var usernameEntered;
+
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
@@ -59,8 +62,17 @@ function populateYouTubeVideos(){
 
 });
 }
+//Capture Username From User Input//
+
+$("#user-login").on("click", function(event){
+    event.preventDefault();
+
+  usernameEntered = $(".unEntered").val().trim();
+  $("#displayMember").html(", "+usernameEntered);
 
 
+
+});
 
 
 //Flexdatalist//
@@ -78,6 +90,19 @@ $("#find-recipe").on("click", function(event){
 
   numRecipesToReturn= $("#numOfRecipes").val();
   console.log(numRecipesToReturn);
+
+  // if (isNaN(numRecipesToReturn)){
+  //   $("#badNumber").html("<b>Not A Number</b>");
+  //   $("#badNumber").show();
+  //   $("#find-recipe").return("false"); 
+  // }else if (numRecipesToReturn < "1"){
+  //   $("#badNumber").html("<b>Must Not Be Less Than 1</b>");
+  //   $("#badNumber").show();
+  //   $("#find-recipe").return("false");
+  // }else{
+  //   $("#badNumber").clear();
+  //   $("find-recipe").return("true");
+  // };
 
 //   populateYouTubeVideos();
 
