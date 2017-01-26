@@ -203,7 +203,14 @@ function addIngredients(inputArray){
 // This function pulls saved recipes from database for the logged in user and write it to the saved recipes tab
 function getSavedRecipes(currUser){
 
+    //Fetch the saved recipes for the specific user
+    databaseRef.ref().child('users').orderByChild('userName').equalTo(currUser).once("value", function(snapshot){
+        //usersRef.orderByChild('jincy').once("value", function(snapshot){
+        console.log(snapshot.val());
 
+        console.log(snapshot.child(currUser).val().savedRecipes);
+    });
+    
 
 }
 
@@ -284,15 +291,6 @@ $(document).ready( function(){
 
     });
 
-
-    //Fetch the saved recipes for the specific user
-    databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
-        //usersRef.orderByChild('jincy').once("value", function(snapshot){
-        console.log(snapshot.val());
-
-        console.log(snapshot.child(searchUser).val().savedRecipes);
-    });
-    
       
 
 });
@@ -306,6 +304,8 @@ $("#user-login").on("click", function(event){
     event.preventDefault();
 
     usernameEntered = $(".unEntered").val().trim();
+
+    //Check if user exists in database, If not display an error and ask to login again
 
     //Display username along with "What's in your Pantry"
     $("#displayMember").html(", "+ usernameEntered);
