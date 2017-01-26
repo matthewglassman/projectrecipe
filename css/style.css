@@ -9,9 +9,6 @@ div{
 	outline-color: orange;
 	margin: 2px;  */
 }
-#recipeBank{
-	padding-top: 15px;
-}
 
 /*
 div{
@@ -35,6 +32,10 @@ div{
 
 #loginButton{
   color: white;
+}
+
+#modal h4 {
+
 }
 
 /*Main Container w/ Background Image*/
@@ -85,6 +86,9 @@ h4 {
 }
 
 /*Tabs for Recipes, Videos, and Saved Recipes*/
+#recipeBank{
+  padding-top: 15px;
+}
 
 #videoBank{
   margin-top: 10px;

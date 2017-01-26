@@ -305,28 +305,41 @@ $(document).ready( function(){
 
     }*/
 
+<<<<<<< HEAD
 /*    var searchUser = "jincy";
     //update records already in the database
     var newRecipe = {recTitle: "recipe4", recURL: "recipeURL4"};
      databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
         //usersRef.orderByChild('jincy').once("value", function(snapshot){
         console.log(snapshot.val());
+=======
+    // var searchUser = "jincy";
+    // //update records already in the database
+    // var newRecipe = {recTitle: "recipe4", recURL: "recipeURL4"};
+    //  databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
+    //     //usersRef.orderByChild('jincy').once("value", function(snapshot){
+    //     console.log(snapshot.val());
+>>>>>>> master
 
-        console.log(snapshot.child(searchUser).val().savedRecipes);
+    //     console.log(snapshot.child(searchUser).val().savedRecipes);
 
-        var savedRecipeArray = snapshot.child(searchUser).val().savedRecipes;
-        savedRecipeArray.push(newRecipe);
+    //     var savedRecipeArray = snapshot.child(searchUser).val().savedRecipes;
+    //     savedRecipeArray.push(newRecipe);
 
-        console.log(savedRecipeArray);
+    //     console.log(savedRecipeArray);
 
-        var currUserRef = usersRef.child(searchUser);
+    //     var currUserRef = usersRef.child(searchUser);
 
-        currUserRef.set({
-                userName: searchUser,
-                savedRecipes: savedRecipeArray
-        });
+    //     currUserRef.set({
+    //             userName: searchUser,
+    //             savedRecipes: savedRecipeArray
+    //     });
 
+<<<<<<< HEAD
     });*/
+=======
+    // });
+>>>>>>> master
     
 
       
@@ -444,10 +457,48 @@ $("#find-recipe").on("click", function(event) {
 
 //When save recipe button is clicked, notify the user and save recipe to the database
 $("#recipes-container").on("click",".save-recipe", function(event){
-   // Materialize.toast(message, displayLength, className, completeCallback);
+   
+   var searchUser = current_user;
+   var savedTitle = $(this).attr("data-recipeTitle");
+   console.log(savedTitle);
+   var savedURL = $(this).attr("data-recipeURL");
+   console.log(savedURL);
+   var savedRecipePhoto = $(this).attr("data-recipeImgURL");
+   console.log(savedRecipePhoto);
+    
+    //update records already in the database
+    var newRecipe = {recTitle: savedTitle, recURL: savedURL, imgURL: savedRecipePhoto};
+    console.log(this);
+     databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
+        //usersRef.orderByChild('jincy').once("value", function(snapshot){
+        console.log(snapshot.val());
+
+        console.log(snapshot.child(searchUser).val().savedRecipes);
+
+        var savedRecipeArray = snapshot.child(searchUser).val().savedRecipes;
+        savedRecipeArray.push(newRecipe);
+
+        console.log(savedRecipeArray);
+
+        var currUserRef = usersRef.child(searchUser);
+
+        currUserRef.set({
+                userName: searchUser,
+                savedRecipes: savedRecipeArray
+        });
+
+    });
+    
+ // Materialize.toast(message, displayLength, className, completeCallback);
     Materialize.toast('Recipe saved!', 3000);
-  
+      
+
 });
+
+
+  
+  
+//});
 
 
 
