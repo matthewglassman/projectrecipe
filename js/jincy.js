@@ -140,7 +140,7 @@ function createRecipeCards(){
         html += "<div class='card-action'>";
         html += "<span class='card-title'>" + value.recipeTitle + "</span>";
         html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
-        html += "<div class = 'save-recipe'><a class='waves-effect pink darken-4 btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'>+ SAVE</a></div>";
+        html += "<div class = 'save-recipe' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'><a class='waves-effect pink darken-4 btn-flat'>+ SAVE</a></div>";
         html += "</div></div></div></div>";
 
         /*$("div#" + ch_item_ID).addClass(imgClass);
@@ -439,8 +439,15 @@ $("#find-recipe").on("click", function(event) {
 $("#recipes-container").on("click",".save-recipe", function(event){
    
    var searchUser = current_user;
+   var savedTitle = $(this).attr("data-recipeTitle");
+   console.log(savedTitle);
+   var savedURL = $(this).attr("data-recipeURL");
+   console.log(savedURL);
+   var savedRecipePhoto = $(this).attr("data-recipeImgURL");
+   console.log(savedRecipePhoto);
+    
     //update records already in the database
-    var newRecipe = {recTitle: $(this).attr(data-recipeTitle), recURL: $(this).attr("data-recipeURL"), imgURL: $(this).attr("data-recipeImgURL")};
+    var newRecipe = {recTitle: savedTitle, recURL: savedURL, imgURL: savedRecipePhoto};
     console.log(this);
      databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
         //usersRef.orderByChild('jincy').once("value", function(snapshot){
