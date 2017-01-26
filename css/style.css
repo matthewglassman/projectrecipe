@@ -81,6 +81,7 @@ h4 {
 
 #numOfRecipes{
   width: 53%;
+  background-color: none;
 }
 
 /*Tabs for Recipes, Videos, and Saved Recipes*/
