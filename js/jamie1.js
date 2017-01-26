@@ -68,7 +68,7 @@ $("#user-login").on("click", function(event){
     event.preventDefault();
 
   usernameEntered = $(".unEntered").val().trim();
-  $("#displayMember").html(", "+usernameEntered);
+  // $("#displayMember").append(usernameEntered);
 
 
 
@@ -91,7 +91,7 @@ $("#find-recipe").on("click", function(event){
   numRecipesToReturn= $("#numOfRecipes").val();
   console.log(numRecipesToReturn);
 
-  if (isNaN(numRecipesToReturn)){
+ if (isNaN(numRecipesToReturn)){
     $("#badNumber").html("<b>Not A Number</b>");
     $("#badNumber").show();
     $("#find-recipe").return("false"); 
