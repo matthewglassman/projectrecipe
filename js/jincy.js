@@ -200,13 +200,20 @@ function addIngredients(inputArray){
     return ingredArray;
 }
 
+// This function pulls saved recipes from database for the logged in user and write it to the saved recipes tab
+function getSavedRecipes(currUser){
+
+
+
+}
+
 
 //--------------------------------------------------------------------------------------
 //--------------------------MAIN PROCESS------------------------------------------------
 
 //------------------------ON DOCUMENT LOAD----------------------------------------------
 
-$(document).ready(function(){
+$(document).ready( function(){
 
     var userArray = ["jincy", "jamie", "mathew", "kathleen"];
     var recipeInfoArray1 = [
@@ -240,6 +247,8 @@ $(document).ready(function(){
 
     console.log("Write to database");
 
+    //Write to databse for first time
+/*
     for(i=0; i<userArray.length; i++){
 
         var myUser = usersRef.child(userArray[i]);
@@ -248,10 +257,35 @@ $(document).ready(function(){
                 savedRecipes: recipeInfoArray1
         });
 
-    }
+    }*/
+
+    var searchUser = "jincy";
+    //update records already in the database
+    var newRecipe = {recTitle: "recipe4", recURL: "recipeURL4"};
+     databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
+        //usersRef.orderByChild('jincy').once("value", function(snapshot){
+        console.log(snapshot.val());
+
+        console.log(snapshot.child(searchUser).val().savedRecipes);
+
+        var savedRecipeArray = snapshot.child(searchUser).val().savedRecipes;
+        savedRecipeArray.push(newRecipe);
+
+        console.log(savedRecipeArray);
+
+        var currUserRef = usersRef.child(searchUser);
+
+        currUserRef.set({
+                userName: searchUser,
+                savedRecipes: savedRecipeArray
+        });
+
+
+
+    });
+
 
     //Fetch the saved recipes for the specific user
-    var searchUser = "jincy";
     databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
         //usersRef.orderByChild('jincy').once("value", function(snapshot){
         console.log(snapshot.val());
@@ -268,13 +302,16 @@ $(document).ready(function(){
 //Capture Username From User Input and also load the saved recipes from the database//
 
 $("#user-login").on("click", function(event){
-    
+
     event.preventDefault();
 
     usernameEntered = $(".unEntered").val().trim();
-    $("#displayMember").html(", "+usernameEntered);
 
+    //Display username along with "What's in your Pantry"
+    $("#displayMember").html(", "+ usernameEntered);
 
+    // Pull saved recipes from database for the logged in user and write it to the saved recipes tab
+    getSavedRecipes(usernameEntered);
 
 });
 
