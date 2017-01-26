@@ -91,18 +91,18 @@ $("#find-recipe").on("click", function(event){
   numRecipesToReturn= $("#numOfRecipes").val();
   console.log(numRecipesToReturn);
 
-  if (isNaN(numRecipesToReturn)){
-    $("#badNumber").html("<b>Not A Number</b>");
-    $("#badNumber").show();
-    $("#find-recipe").return("false"); 
-  }else if (numRecipesToReturn < "1"){
-    $("#badNumber").html("<b>Must Not Be Less Than 1</b>");
-    $("#badNumber").show();
-    $("#find-recipe").return("false");
-  }else{
-    $("#badNumber").clear();
-    $("find-recipe").return("true");
-  };
+  // if (isNaN(numRecipesToReturn)){
+  //   $("#badNumber").html("<b>Not A Number</b>");
+  //   $("#badNumber").show();
+  //   $("#find-recipe").return("false"); 
+  // }else if (numRecipesToReturn < "1"){
+  //   $("#badNumber").html("<b>Must Not Be Less Than 1</b>");
+  //   $("#badNumber").show();
+  //   $("#find-recipe").return("false");
+  // }else{
+  //   $("#badNumber").clear();
+  //   $("find-recipe").return("true");
+  // };
 
 //   populateYouTubeVideos();
 
