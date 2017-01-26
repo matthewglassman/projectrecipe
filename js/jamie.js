@@ -62,17 +62,6 @@ function populateYouTubeVideos(){
 
 });
 }
-//Capture Username From User Input//
-
-$("#user-login").on("click", function(event){
-    event.preventDefault();
-
-  usernameEntered = $(".unEntered").val().trim();
-  $("#displayMember").html(", "+usernameEntered);
-
-
-
-});
 
 
 //Flexdatalist//
