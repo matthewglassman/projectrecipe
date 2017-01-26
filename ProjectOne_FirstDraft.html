@@ -107,29 +107,11 @@
               <h4>What's in Your Pantry<span id="displayMember"></span>!?</h4>
               <p>See what comes back!</p>
 
-               <!-- <h3 id="displayMember">Ingredients</h3>  -->
 
               <form>
 
-        <!--       <div class="row">
-              <div class="col s12"> -->
-
-
-   <!--            <input type='text'
-                 placeholder="Type in your ingredients..."
-                 class="flexdatalist white-text"
-                 data-data="ingredients.json"
-                 data-search-in="name"
-                 data-visible-properties="name"
-                 data-selection-required="true"
-                 data-value-property="id"
-                 data-text-property="{name}"
-                 data-min-length="1"
-                 multiple="multiple"
-                 name="ingredient_id"> -->
-
                 <input type="text"
-                       placeholder= "Type in your ingredients..."
+                       placeholder= "Type in your ingredients here..."
                        class="flexdatalist white-text"
                        data-min-length="1"
                        multiple="multiple"
@@ -154,7 +136,9 @@
                 <input id="numOfRecipes" type="text" class="white-text" size="1" maxlength="2" placeholder="How Many Recipes?">
                 <span id="badNumber" class="red-text"></span>
               </div>
-              <button class="waves-effect pink darken-4 btn-large" type="button" name="action" id="find-recipe">Let's get cooking!</button>
+
+              <button class="waves-effect pink darken-4 btn-large" type="button" name="action" id="find-recipe" onclick="location.href='#recipes-container'">Let's get cooking!</button>
+
 
               <!-- <i class="material-icons right">send</i> -->
               <!-- </div> --><!--End of col12-->
