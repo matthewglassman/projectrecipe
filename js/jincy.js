@@ -231,21 +231,28 @@ function getSavedRecipes(currUser){
         //usersRef.orderByChild('jincy').once("value", function(snapshot){
         console.log(snapshot.val());
 
-        console.log(snapshot.child(currUser).val().savedRecipes);
+        //Check if user exists in databse
+        var exists = (snapshot.val() !== null);
+        console.log(exists);
 
-        //Clear the html in My Saved Recipes tab
-        $("#savedRecipes-container").empty();
 
-        var arrSavedRecipes = snapshot.child(currUser).val().savedRecipes;
+        //Get the saved recipes only if user exists in DB
+        if(exists) {
+            console.log(snapshot.child(currUser).val().savedRecipes);
 
-        //Loop through the array and generate html for each recipe
-        for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
+            //Clear the html in My Saved Recipes tab
+            $("#savedRecipes-container").empty();
 
-            var html = createSavedRecipeCards(arrSavedRecipes[i]);
+            var arrSavedRecipes = snapshot.child(currUser).val().savedRecipes;
 
-            $("#savedRecipes-container").append(html);
+            //Loop through the array and generate html for each recipe
+            for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
+
+                var html = createSavedRecipeCards(arrSavedRecipes[i]);
+
+                $("#savedRecipes-container").append(html);
         }
-
+        }
 
 
     });
