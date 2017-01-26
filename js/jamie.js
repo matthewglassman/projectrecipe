@@ -92,7 +92,7 @@ $("#find-recipe").on("click", function(event){
   // if (isNaN(numRecipesToReturn)){
   //   $("#badNumber").html("<b>Not A Number</b>");
   //   $("#badNumber").show();
-  //   $("#find-recipe").return("false"); 
+  //   $("#find-recipe").return("false");
   // }else if (numRecipesToReturn < "1"){
   //   $("#badNumber").html("<b>Must Not Be Less Than 1</b>");
   //   $("#badNumber").show();
@@ -103,5 +103,10 @@ $("#find-recipe").on("click", function(event){
   // };
 
 //   populateYouTubeVideos();
+
+//Takes user to Recipe tab
+var takeMeTo = window.location;
+takeMeTo = $(this).data("url");
+console.log(takeMeTo);
 
 });

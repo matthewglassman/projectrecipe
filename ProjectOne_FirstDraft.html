@@ -40,12 +40,12 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a class="waves-effect pink darken-4 btn modal-trigger" href="#modal1">Login</a></li>
-        <li><a href="?action=#userSavedRecipes">My Saved Recipes</a></li>
+        <li><a href="#userSavedRecipes">My Saved Recipes</a></li>
       </ul>
 
       <ul class="side-nav" id="mobile-demo">
         <li><a class="waves-effect pink darken-4 btn modal-trigger" href="#modal1" id="login">Login</a></li>
-        <li><a href="?action=#userSavedRecipes">My Saved Recipes</a></li>
+        <li><a href="#userSavedRecipes">My Saved Recipes</a></li>
       </ul>
 
     </div>
@@ -54,7 +54,7 @@
     <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
-      <h4>Login</h4>
+      <h4 class="teal-text text-lighten-1">Login</h4>
       <p>Please enter your username below!</p>
     </div>
 
@@ -137,7 +137,7 @@
                 <span id="badNumber" class="red-text"></span>
               </div>
 
-              <button class="waves-effect pink darken-4 btn-large" type="button" name="action" id="find-recipe" onclick="location.href='#recipes-container'">Let's get cooking!</button>
+              <button class="waves-effect pink darken-4 btn-large" type="button" name="action" id="find-recipe" data-url="#recipeBank">Let's get cooking!</button>
 
 
               <!-- <i class="material-icons right">send</i> -->
