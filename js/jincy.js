@@ -227,7 +227,7 @@ function getSavedRecipes(currUser){
             html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
             html += "<div class='card-stacked'>";
             html += "<div class='card-content' id = 'savedCard-panel'>";
-            html += "<h5><a href='" + arrSavedRecipes[i].recURL + "'>" + arrSavedRecipes[i].recTitle + "</a></h5></div>";
+            html += "<h5><a href='" + arrSavedRecipes[i].recURL + "' target='_blank'>" + arrSavedRecipes[i].recTitle + "</a></h5></div>";
             html += "</div></div></div>";
              
             console.log(html);
