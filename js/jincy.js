@@ -7,6 +7,8 @@ var recipeResultArray = [];
 var recipeCount = 10;
 var search_ingredients = "oranges%2Cflour%2Cchicken";
 var current_user = "";
+//This variable will be user input based on the number of recipes they want to search for.
+var numRecipesToReturn = 0;
 
 // Initialize Firebase
  var config = {
@@ -263,9 +265,18 @@ $(document).ready(function(){
 
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------LOGIN - ON CLICK -------------------------------------------
+//Capture Username From User Input and also load the saved recipes from the database//
+
 $("#user-login").on("click", function(event){
     
-})
+    event.preventDefault();
+
+    usernameEntered = $(".unEntered").val().trim();
+    $("#displayMember").html(", "+usernameEntered);
+
+
+
+});
 
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------Spoonacular API call----------------------------------------
@@ -279,10 +290,14 @@ $("#find-recipe").on("click", function(event) {
     // We're optionally using a form so the user may hit Enter to search instead of clicking the button
     event.preventDefault();    
 
+    //Here we grab the text from the input box for number of recipes entered by user
+    numRecipesToReturn= $("#numOfRecipes").val().trim();
+    console.log(numRecipesToReturn);
+
     // Here we grab the text from the input box
     //var recipe = $("#recipe-input").val();
     // Here we grab the text from the input box
-    var recipe = $("#recipe-input").val();
+    var recipe = $("#recipe-input").val().trim();
 
     // Here we construct our URL
     var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?";
@@ -339,7 +354,7 @@ $("#find-recipe").on("click", function(event) {
 
 });
 
-//When save recipe button is clicked, notify the user and save recipe to the databse
+//When save recipe button is clicked, notify the user and save recipe to the database
 $("#recipes-container").on("click",".save-recipe", function(event){
    // Materialize.toast(message, displayLength, className, completeCallback);
     Materialize.toast('Recipe saved!', 3000);
