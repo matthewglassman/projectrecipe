@@ -140,7 +140,7 @@ function createRecipeCards(){
         html += "<div class='card-action'>";
         html += "<span class='card-title'>" + value.recipeTitle + "</span>";
         html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
-        html += "<div class = 'save-recipe'><a class='waves-effect pink darken-4 btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'>+ SAVE</a></div>";
+        html += "<div class = 'save-recipe' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'><a class='waves-effect pink darken-4 btn-flat'>+ SAVE</a></div>";
         html += "</div></div></div></div>";
 
         /*$("div#" + ch_item_ID).addClass(imgClass);
@@ -251,7 +251,7 @@ function getSavedRecipes(currUser){
                 var html = createSavedRecipeCards(arrSavedRecipes[i]);
 
                 $("#savedRecipes-container").append(html);
-        }
+            }
         }
 
 
@@ -266,8 +266,8 @@ function addUserData(){
     var userArray = ["jincy", "jamie", "mathew", "kathleen"];
     var recipeInfoArray1 = [
                             {recTitle: "recipe1", recURL: "recipeURL1", imgURL: "IMAGEurl1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2", imgURL: "IMAGEurl1"},
-                            {recTitle: "recipe3", recURL: "recipeURL3", imgURL: "IMAGEurl1"},
+                            {recTitle: "recipe2", recURL: "recipeURL2", imgURL: "IMAGEurl1"}
+                            
     ];
 
     for(i=0; i<userArray.length; i++){
@@ -293,7 +293,7 @@ $(document).ready( function(){
     console.log("Write to database");
 
     //Write to databse for first time
-    //addUserData();
+    addUserData();
 /*
     for(i=0; i<userArray.length; i++){
 
@@ -305,7 +305,7 @@ $(document).ready( function(){
 
     }*/
 
-    var searchUser = "jincy";
+/*    var searchUser = "jincy";
     //update records already in the database
     var newRecipe = {recTitle: "recipe4", recURL: "recipeURL4"};
      databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
@@ -326,7 +326,7 @@ $(document).ready( function(){
                 savedRecipes: savedRecipeArray
         });
 
-    });
+    });*/
     
 
       
