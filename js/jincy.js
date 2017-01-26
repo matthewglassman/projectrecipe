@@ -440,7 +440,7 @@ $("#recipes-container").on("click",".save-recipe", function(event){
    
    var searchUser = current_user;
     //update records already in the database
-    var newRecipe = {recTitle: $(this).attr("data-recipeTitle"), recURL: $(this).attr("data-recipeURL"), imgURL: $(this).attr("data-recipeImgURL")};
+    var newRecipe = {recTitle: $(this).attr(data-recipeTitle), recURL: $(this).attr("data-recipeURL"), imgURL: $(this).attr("data-recipeImgURL")};
     console.log(this);
      databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
         //usersRef.orderByChild('jincy').once("value", function(snapshot){
