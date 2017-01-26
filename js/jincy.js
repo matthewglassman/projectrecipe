@@ -140,7 +140,7 @@ function createRecipeCards(){
         html += "<div class='card-action'>";
         html += "<span class='card-title'>" + value.recipeTitle + "</span>";
         html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
-        html += "<div class = 'save-recipe'><a class='waves-effect pink darken-4 btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "'>+ SAVE</a></div>";
+        html += "<div class = 'save-recipe'><a class='waves-effect pink darken-4 btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'>+ SAVE</a></div>";
         html += "</div></div></div></div>";
 
         /*$("div#" + ch_item_ID).addClass(imgClass);
@@ -244,13 +244,34 @@ function getSavedRecipes(currUser){
             var html = createSavedRecipeCards(arrSavedRecipes[i]);
 
             $("#savedRecipes-container").append(html);
-
         }
 
 
 
     });
     
+
+}
+
+//This function adds user data to database
+function addUserData(){
+
+    var userArray = ["jincy", "jamie", "mathew", "kathleen"];
+    var recipeInfoArray1 = [
+                            {recTitle: "recipe1", recURL: "recipeURL1", imgURL: "IMAGEurl1"},
+                            {recTitle: "recipe2", recURL: "recipeURL2", imgURL: "IMAGEurl1"},
+                            {recTitle: "recipe3", recURL: "recipeURL3", imgURL: "IMAGEurl1"},
+    ];
+
+    for(i=0; i<userArray.length; i++){
+
+            var myUser = usersRef.child(userArray[i]);
+            myUser.set({
+                    userName: userArray[i],
+                    savedRecipes: recipeInfoArray1
+        });
+
+    }
 
 }
 
@@ -262,39 +283,10 @@ function getSavedRecipes(currUser){
 
 $(document).ready( function(){
 
-    var userArray = ["jincy", "jamie", "mathew", "kathleen"];
-    var recipeInfoArray1 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-    var recipeInfoArray2 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-
-    var recipeInfoArray3 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-    var recipeInfoArray4 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-
-    var userInfoArray = [
-                    {userName: "jincy", savedRecipes: recipeInfoArray1},
-                    {userName: "jamie", savedRecipes: recipeInfoArray2},
-                    {userName: "mathew", savedRecipes: recipeInfoArray3},
-                    {userName: "kathleen", savedRecipes: recipeInfoArray4}
-    ];
-
     console.log("Write to database");
 
     //Write to databse for first time
+    //addUserData();
 /*
     for(i=0; i<userArray.length; i++){
 
@@ -328,13 +320,14 @@ $(document).ready( function(){
         });
 
     });
+    
 
       
 
 });
 
 //----------------------------------------------------------------------------------------------------
-//----------------------------------------LOAD NEW SAVED RECIPES--------------------------------------
+//----------------------------------------LOGIN - ON CLICK -------------------------------------------
 //Capture Username From User Input and also load the saved recipes from the database//
 
 $("#user-login").on("click", function(event){
@@ -354,8 +347,17 @@ $("#user-login").on("click", function(event){
 });
 
 //----------------------------------------------------------------------------------------------------
-//----------------------------------------LOGIN - ON CLICK -------------------------------------------
-//Capture Username From User Input and also load the saved recipes from the database//
+//----------------------------------------LOAD NEW SAVED RECIPES--------------------------------------
+databaseRef.ref().child('users').orderByChild('userName').equalTo(current_user).on("child_added", function(snapshot){
+
+    console.log("Inside child added");
+
+    console.log(snapshot.val());
+
+    console.log(snapshot.child(current_user).val().savedRecipes);
+
+
+});
 
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------Spoonacular API call----------------------------------------
