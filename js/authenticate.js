@@ -144,6 +144,7 @@ $("#numberadd").on("click", function(event){
 	});
 });
 
+<<<<<<< HEAD
 // database.ref().on("value", function(snapshot) {
 // 	 for (var key in snapshot.val()){ 
 // 	  //console.log(snapshot.val());
@@ -159,4 +160,14 @@ database.ref().orderByChild('User').equalTo('matthew@bootcamp.com').on("value", 
 	console.log(snapshot.val()[key].User);
 	console.log(snapshot.val()[key].number);
 };
+=======
+database.ref().on("value", function(snapshot) {
+	 for (var key in snapshot.val()){ 
+	  //console.log(snapshot.val());
+      console.log(snapshot.val()[key].User);
+      console.log(snapshot.val()[key].number);
+  };
+}, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+>>>>>>> master
 });
