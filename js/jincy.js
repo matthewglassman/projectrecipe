@@ -209,6 +209,17 @@ function getSavedRecipes(currUser){
         console.log(snapshot.val());
 
         console.log(snapshot.child(currUser).val().savedRecipes);
+
+        //Clear the html in My Saved Recipes tab
+        $("#savedRecipes-container").empty();
+
+        var arrSavedRecipes = snapshot.child(currUser).val().savedRecipes;
+
+        //Loop through the array and generate html for each recipe
+        for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
+
+        }
+
     });
     
 
@@ -333,8 +344,8 @@ $("#find-recipe").on("click", function(event) {
 
     // Here we grab the text from the input box
     //var recipe = $("#recipe-input").val();
-    // Here we grab the text from the input box
-    var recipe = $("#recipe-input").val().trim();
+    // Here we grab the text from the ingredients input box
+    var recipe = $("[name=ingredients]").val().trim();
 
     // Here we construct our URL
     var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?";
