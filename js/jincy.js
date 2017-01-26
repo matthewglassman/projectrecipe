@@ -203,7 +203,43 @@ function addIngredients(inputArray){
 // This function pulls saved recipes from database for the logged in user and write it to the saved recipes tab
 function getSavedRecipes(currUser){
 
+    //Fetch the saved recipes for the specific user
+    databaseRef.ref().child('users').orderByChild('userName').equalTo(currUser).once("value", function(snapshot){
+        //usersRef.orderByChild('jincy').once("value", function(snapshot){
+        console.log(snapshot.val());
 
+        console.log(snapshot.child(currUser).val().savedRecipes);
+
+        //Clear the html in My Saved Recipes tab
+        $("#savedRecipes-container").empty();
+
+        var arrSavedRecipes = snapshot.child(currUser).val().savedRecipes;
+
+        //Loop through the array and generate html for each recipe
+        for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
+
+            var img = "http://lorempixel.com/100/190/nature/6";
+
+            var html = "<div class='col s12 m6 l6'>";
+
+            html += "<div class='card horizontal' id='savedCard'>";
+            html += "<div class='card-image'>";
+            html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
+            html += "<div class='card-stacked'>";
+            html += "<div class='card-content' id = 'savedCard-panel'>";
+            html += "<h5><a href='" + arrSavedRecipes[i].recURL + "'>" + arrSavedRecipes[i].recTitle + "</a></h5></div>";
+            html += "</div></div></div>";
+             
+            console.log(html);
+
+            $("#savedRecipes-container").append(html);
+
+        }
+
+
+
+    });
+    
 
 }
 
@@ -284,15 +320,6 @@ $(document).ready( function(){
 
     });
 
-
-    //Fetch the saved recipes for the specific user
-    databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
-        //usersRef.orderByChild('jincy').once("value", function(snapshot){
-        console.log(snapshot.val());
-
-        console.log(snapshot.child(searchUser).val().savedRecipes);
-    });
-    
       
 
 });
@@ -306,6 +333,8 @@ $("#user-login").on("click", function(event){
     event.preventDefault();
 
     usernameEntered = $(".unEntered").val().trim();
+
+    //Check if user exists in database, If not display an error and ask to login again
 
     //Display username along with "What's in your Pantry"
     $("#displayMember").html(", "+ usernameEntered);
@@ -333,8 +362,8 @@ $("#find-recipe").on("click", function(event) {
 
     // Here we grab the text from the input box
     //var recipe = $("#recipe-input").val();
-    // Here we grab the text from the input box
-    var recipe = $("#recipe-input").val().trim();
+    // Here we grab the text from the ingredients input box
+    var recipe = $("[name=ingredients]").val().trim();
 
     // Here we construct our URL
     var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?";
