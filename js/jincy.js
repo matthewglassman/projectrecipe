@@ -140,7 +140,7 @@ function createRecipeCards(){
         html += "<div class='card-action'>";
         html += "<span class='card-title'>" + value.recipeTitle + "</span>";
         html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
-        html += "<div class = 'save-recipe'><a class='waves-effect pink darken-4 btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "'>+ SAVE</a></div>";
+        html += "<div class = 'save-recipe'><a class='waves-effect pink darken-4 btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'>+ SAVE</a></div>";
         html += "</div></div></div></div>";
 
         /*$("div#" + ch_item_ID).addClass(imgClass);
@@ -200,6 +200,29 @@ function addIngredients(inputArray){
     return ingredArray;
 }
 
+// Create html for saved recipe cards
+function createSavedRecipeCards(recipeInfo){
+
+    console.log(recipeInfo);
+
+    var img = "http://lorempixel.com/100/190/nature/6";
+
+    var html = "<div class='col s12 m6 l6'>";
+
+    html += "<div class='card horizontal' id='savedCard'>";
+    html += "<div class='card-image'>";
+    html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
+    html += "<div class='card-stacked'>";
+    html += "<div class='card-content' id = 'savedCard-panel'>";
+    html += "<h5><a href='" + recipeInfo.recURL + "' target='_blank' class ='black-text'>" + recipeInfo.recTitle + "</a></h5></div>";
+    html += "</div></div></div>";
+     
+    console.log(html);
+
+return html;
+
+} 
+
 // This function pulls saved recipes from database for the logged in user and write it to the saved recipes tab
 function getSavedRecipes(currUser){
 
@@ -218,28 +241,37 @@ function getSavedRecipes(currUser){
         //Loop through the array and generate html for each recipe
         for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
 
-            var img = "http://lorempixel.com/100/190/nature/6";
-
-            var html = "<div class='col s12 m6 l6'>";
-
-            html += "<div class='card horizontal' id='savedCard'>";
-            html += "<div class='card-image'>";
-            html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
-            html += "<div class='card-stacked'>";
-            html += "<div class='card-content' id = 'savedCard-panel'>";
-            html += "<h5><a href='" + arrSavedRecipes[i].recURL + "'>" + arrSavedRecipes[i].recTitle + "</a></h5></div>";
-            html += "</div></div></div>";
-             
-            console.log(html);
+            var html = createSavedRecipeCards(arrSavedRecipes[i]);
 
             $("#savedRecipes-container").append(html);
-
         }
 
 
 
     });
     
+
+}
+
+//This function adds user data to database
+function addUserData(){
+
+    var userArray = ["jincy", "jamie", "mathew", "kathleen"];
+    var recipeInfoArray1 = [
+                            {recTitle: "recipe1", recURL: "recipeURL1", imgURL: "IMAGEurl1"},
+                            {recTitle: "recipe2", recURL: "recipeURL2", imgURL: "IMAGEurl1"},
+                            {recTitle: "recipe3", recURL: "recipeURL3", imgURL: "IMAGEurl1"},
+    ];
+
+    for(i=0; i<userArray.length; i++){
+
+            var myUser = usersRef.child(userArray[i]);
+            myUser.set({
+                    userName: userArray[i],
+                    savedRecipes: recipeInfoArray1
+        });
+
+    }
 
 }
 
@@ -251,39 +283,10 @@ function getSavedRecipes(currUser){
 
 $(document).ready( function(){
 
-    var userArray = ["jincy", "jamie", "mathew", "kathleen"];
-    var recipeInfoArray1 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-    var recipeInfoArray2 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-
-    var recipeInfoArray3 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-    var recipeInfoArray4 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-
-    var userInfoArray = [
-                    {userName: "jincy", savedRecipes: recipeInfoArray1},
-                    {userName: "jamie", savedRecipes: recipeInfoArray2},
-                    {userName: "mathew", savedRecipes: recipeInfoArray3},
-                    {userName: "kathleen", savedRecipes: recipeInfoArray4}
-    ];
-
     console.log("Write to database");
 
     //Write to databse for first time
+    //addUserData();
 /*
     for(i=0; i<userArray.length; i++){
 
@@ -316,9 +319,8 @@ $(document).ready( function(){
                 savedRecipes: savedRecipeArray
         });
 
-
-
     });
+    
 
       
 
@@ -332,15 +334,28 @@ $("#user-login").on("click", function(event){
 
     event.preventDefault();
 
-    usernameEntered = $(".unEntered").val().trim();
+    current_user = $(".unEntered").val().trim();
 
     //Check if user exists in database, If not display an error and ask to login again
 
     //Display username along with "What's in your Pantry"
-    $("#displayMember").html(", "+ usernameEntered);
+    $("#displayMember").html(", "+ current_user);
 
     // Pull saved recipes from database for the logged in user and write it to the saved recipes tab
-    getSavedRecipes(usernameEntered);
+    getSavedRecipes(current_user);
+
+});
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------LOAD NEW SAVED RECIPES--------------------------------------
+databaseRef.ref().child('users').orderByChild('userName').equalTo(current_user).on("child_added", function(snapshot){
+
+    console.log("Inside child added");
+
+    console.log(snapshot.val());
+
+    console.log(snapshot.child(current_user).val().savedRecipes);
+
 
 });
 
