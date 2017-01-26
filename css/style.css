@@ -130,7 +130,7 @@ border-radius: 3px;
 
 .card .card-content{
   width: 100%;
-	height: 660px;
+	height: 680px;
 	display: inline-block;
   xmargin: -20px;
 }
@@ -139,7 +139,7 @@ border-radius: 3px;
 }
 .ch-item {
 	width: 100%;
-	height: 430px;
+	height: 470px;
 	xborder-radius: 50%;
 	position: relative;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.1);
@@ -273,6 +273,9 @@ span.missed {
 span.used {
     background-color: #4f880e;
 }
-
+#savedCard-panel{
+	height: auto !important;
+	background-color: #91a17f !important;
+}
 /* -----------------------------------------------------------------------*/
 

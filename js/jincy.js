@@ -218,7 +218,25 @@ function getSavedRecipes(currUser){
         //Loop through the array and generate html for each recipe
         for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
 
+            var img = "http://lorempixel.com/100/190/nature/6";
+
+            var html = "<div class='col s12 m6 l6'>";
+
+            html += "<div class='card horizontal' id='savedCard'>";
+            html += "<div class='card-image'>";
+            html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
+            html += "<div class='card-stacked'>";
+            html += "<div class='card-content' id = 'savedCard-panel'>";
+            html += "<h5><a href='" + arrSavedRecipes[i].recURL + "'>" + arrSavedRecipes[i].recTitle + "</a></h5></div>";
+            html += "</div></div></div>";
+             
+            console.log(html);
+
+            $("#savedRecipes-container").append(html);
+
         }
+
+
 
     });
     
