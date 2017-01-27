@@ -473,7 +473,7 @@ $("#find-recipe").on("click", function(event) {
         }
     });
 
-  //   populateYouTubeVideos();
+  // populateYouTubeVideos();
 
 });
 
@@ -481,6 +481,8 @@ $("#find-recipe").on("click", function(event) {
 $("#recipes-container").on("click",".save-recipe", function(event){
 
    var searchUser = current_user;
+
+   
    var savedTitle = $(this).attr("data-recipeTitle");
    console.log(savedTitle);
    var savedURL = $(this).attr("data-recipeURL");
