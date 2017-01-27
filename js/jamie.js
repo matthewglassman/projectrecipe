@@ -9,7 +9,11 @@ var numRecipesToReturn;
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
     $(".button-collapse").sideNav();
+    $('ul.tabs').tabs();
   });
+
+//Materialize Scrolling to Tabs
+
 
 
 //Pulling data from youTube and populating page with videos
@@ -17,7 +21,6 @@ var numRecipesToReturn;
 function populateYouTubeVideos(){
 
 //This variable will be user input based on the number of videos they want to search for.
-// var numRecipesToReturn = "10";
 
  var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchParameters+"&type=video&order=relevance&maxResults="+numRecipesToReturn+"&key=AIzaSyB5ewohlv82vxqUvMYZCS_htMbXO_U66K8";
       // console.log(searchYouTube);
@@ -60,18 +63,6 @@ function populateYouTubeVideos(){
 
 });
 }
-//Capture Username From User Input//
-
-/*$("#user-login").on("click", function(event){
-    event.preventDefault();
-
-  usernameEntered = $(".unEntered").val().trim();
-  $("#displayMember").html(", "+usernameEntered);
-
-
-
-});*/
-
 
 //Flexdatalist//
 
@@ -89,6 +80,10 @@ $("#find-recipe").on("click", function(event){
   numRecipesToReturn= $("#numOfRecipes").val();
   console.log(numRecipesToReturn);
 
+  $("body, html").animate({
+
+  })
+
   // if (isNaN(numRecipesToReturn)){
   //   $("#badNumber").html("<b>Not A Number</b>");
   //   $("#badNumber").show();
@@ -105,8 +100,8 @@ $("#find-recipe").on("click", function(event){
 //   populateYouTubeVideos();
 
 //Takes user to Recipe tab
-var takeMeTo = window.location;
-takeMeTo = $(this).data("url");
-console.log(takeMeTo);
-
+// var takeMeTo = window.location;
+// takeMeTo = $(this).data("url");
+// console.log("takemeto: "+takeMeTo);
 });
+
