@@ -4,8 +4,8 @@
 var errMsg = "Not Available";
 var recipeResults = [];
 var recipeResultArray = [];
-var recipeCount = 10;
-var search_ingredients = "oranges%2Cflour%2Cchicken";
+//var recipeCount = 10;
+//var search_ingredients = "oranges%2Cflour%2Cchicken";
 var current_user = "";
 //This variable will be user input based on the number of recipes they want to search for.
 var numRecipesToReturn = 0;
@@ -87,13 +87,12 @@ function extractRecipeInfo(){
 
                 //Get Image URL
                 console.log("Image URL: " + recipeResults[i].image);
-                if (typeof(recipeResults[i].image === "undefined" || recipeResults[i].image === " " ) {
-                        RecipeInfo.imageURL = errMsg;
-                }else{
+                if (typeof(recipeResults[i].image === "undefined" || recipeResults[i].image === " " )) {
                     RecipeInfo.imageURL = recipeResults[i].image;
                 }
+                
 
-                //Push the object to recipeResultArray
+                //Push the object to recipeResultArr
                 recipeResultArray.push(RecipeInfo);
         }
 }
@@ -356,7 +355,11 @@ $("#find-recipe").on("click", function(event) {
     //var recipe = $("#recipe-input").val();
     // Here we grab the text from the ingredients input box
     var recipe = $("[name=ingredients]").val().trim();
-
+    var search_ingredients = recipe.replace(/,/g, "%2C");
+    console.log (search_ingredients);
+    //here is where we get the number of recipes
+    var recipeCount = $("#numOfRecipes").val();
+    console.log (recipeCount);
     // Here we construct our URL
     var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?";
             
