@@ -6,6 +6,9 @@ var recipeResults = [];
 var recipeResultArray = [];
 var recipeCount = 10;
 var search_ingredients = "oranges%2Cflour%2Cchicken";
+var current_user = "";
+//This variable will be user input based on the number of recipes they want to search for.
+var numRecipesToReturn = 0;
 
 // Initialize Firebase
  var config = {
@@ -136,7 +139,7 @@ function createRecipeCards(){
         html += "<div class='card-action'>";
         html += "<span class='card-title'>" + value.recipeTitle + "</span>";
         html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
-        html += "<div class = 'save-recipe'><a class='waves-effect pink darken-4 btn-flat' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "'>+ SAVE</a></div>";
+        html += "<div class = 'save-recipe' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'><a class='waves-effect pink darken-4 btn-flat'>+ SAVE</a></div>";
         html += "</div></div></div></div>";
 
         /*$("div#" + ch_item_ID).addClass(imgClass);
@@ -196,44 +199,94 @@ function addIngredients(inputArray){
     return ingredArray;
 }
 
+// Create html for saved recipe cards
+function createSavedRecipeCards(recipeInfo){
+
+    console.log(recipeInfo);
+
+    var img = "http://lorempixel.com/100/190/nature/6";
+
+    var html = "<div class='col s12 m6 l6'>";
+
+    html += "<div class='card horizontal' id='savedCard'>";
+    html += "<div class='card-image'>";
+    html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
+    html += "<div class='card-stacked'>";
+    html += "<div class='card-content' id = 'savedCard-panel'>";
+    html += "<h5><a href='" + recipeInfo.recURL + "' target='_blank' class ='black-text'>" + recipeInfo.recTitle + "</a></h5></div>";
+    html += "</div></div></div>";
+     
+    console.log(html);
+
+return html;
+
+} 
+
+// This function pulls saved recipes from database for the logged in user and write it to the saved recipes tab
+function getSavedRecipes(currUser){
+
+    //Fetch the saved recipes for the specific user
+    databaseRef.ref().child('users').orderByChild('userName').equalTo(currUser).once("value", function(snapshot){
+        //usersRef.orderByChild('jincy').once("value", function(snapshot){
+        console.log(snapshot.val());
+
+        console.log(snapshot.child(currUser).val().savedRecipes);
+
+        //Clear the html in My Saved Recipes tab
+        $("#savedRecipes-container").empty();
+
+        var arrSavedRecipes = snapshot.child(currUser).val().savedRecipes;
+
+        //Loop through the array and generate html for each recipe
+        for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
+
+            var html = createSavedRecipeCards(arrSavedRecipes[i]);
+
+            $("#savedRecipes-container").append(html);
+        }
+
+
+
+    });
+    
+
+}
+
+//This function adds user data to database
+function addUserData(){
+
+    var userArray = ["jincy", "jamie", "mathew", "kathleen"];
+    var recipeInfoArray1 = [
+                            {recTitle: "recipe1", recURL: "recipeURL1", imgURL: "IMAGEurl1"},
+                            {recTitle: "recipe2", recURL: "recipeURL2", imgURL: "IMAGEurl1"},
+                            {recTitle: "recipe3", recURL: "recipeURL3", imgURL: "IMAGEurl1"},
+    ];
+
+    for(i=0; i<userArray.length; i++){
+
+            var myUser = usersRef.child(userArray[i]);
+            myUser.set({
+                    userName: userArray[i],
+                    savedRecipes: recipeInfoArray1
+        });
+
+    }
+
+}
+
 
 //--------------------------------------------------------------------------------------
 //--------------------------MAIN PROCESS------------------------------------------------
 
-$(document).ready(function(){
+//------------------------ON DOCUMENT LOAD----------------------------------------------
 
-    var userArray = ["jincy", "jamie", "mathew", "kathleen"];
-    var recipeInfoArray1 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-    var recipeInfoArray2 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-
-    var recipeInfoArray3 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-    var recipeInfoArray4 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2"},
-                            {recTitle: "recipe3", recURL: "recipeURL3"},
-    ];
-
-    var userInfoArray = [
-                    {userName: "jincy", savedRecipes: recipeInfoArray1},
-                    {userName: "jamie", savedRecipes: recipeInfoArray2},
-                    {userName: "mathew", savedRecipes: recipeInfoArray3},
-                    {userName: "kathleen", savedRecipes: recipeInfoArray4}
-    ];
+$(document).ready( function(){
 
     console.log("Write to database");
 
+    //Write to databse for first time
+    //addUserData();
+/*
     for(i=0; i<userArray.length; i++){
 
         var myUser = usersRef.child(userArray[i]);
@@ -242,25 +295,73 @@ $(document).ready(function(){
                 savedRecipes: recipeInfoArray1
         });
 
-    }
+    }*/
 
-    //Fetch the saved recipes for the specific user
-    var searchUser = "jincy";
-    databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
-        //usersRef.orderByChild('jincy').once("value", function(snapshot){
-        console.log(snapshot.val());
+    // var searchUser = "jincy";
+    // //update records already in the database
+    // var newRecipe = {recTitle: "recipe4", recURL: "recipeURL4"};
+    //  databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
+    //     //usersRef.orderByChild('jincy').once("value", function(snapshot){
+    //     console.log(snapshot.val());
 
-        console.log(snapshot.child(searchUser).val().savedRecipes);
-    });
+    //     console.log(snapshot.child(searchUser).val().savedRecipes);
+
+    //     var savedRecipeArray = snapshot.child(searchUser).val().savedRecipes;
+    //     savedRecipeArray.push(newRecipe);
+
+    //     console.log(savedRecipeArray);
+
+    //     var currUserRef = usersRef.child(searchUser);
+
+    //     currUserRef.set({
+    //             userName: searchUser,
+    //             savedRecipes: savedRecipeArray
+    //     });
+
+    // });
     
+
       
 
 });
 
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------LOGIN - ON CLICK -------------------------------------------
+//Capture Username From User Input and also load the saved recipes from the database//
 
-//-------------------------------------------------
+$("#user-login").on("click", function(event){
 
-//Spoonacular API call
+    event.preventDefault();
+
+    current_user = $(".unEntered").val().trim();
+
+    //Check if user exists in database, If not display an error and ask to login again
+
+    //Display username along with "What's in your Pantry"
+    $("#displayMember").html(", "+ current_user);
+
+    // Pull saved recipes from database for the logged in user and write it to the saved recipes tab
+    getSavedRecipes(current_user);
+
+});
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------LOAD NEW SAVED RECIPES--------------------------------------
+databaseRef.ref().child('users').orderByChild('userName').equalTo(current_user).on("child_added", function(snapshot){
+
+    console.log("Inside child added");
+
+    console.log(snapshot.val());
+
+    console.log(snapshot.child(current_user).val().savedRecipes);
+
+
+});
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------Spoonacular API call----------------------------------------
+
+
 // This .on("click") function will trigger the AJAX Call
 $("#find-recipe").on("click", function(event) {
 
@@ -269,10 +370,14 @@ $("#find-recipe").on("click", function(event) {
     // We're optionally using a form so the user may hit Enter to search instead of clicking the button
     event.preventDefault();    
 
+    //Here we grab the text from the input box for number of recipes entered by user
+    numRecipesToReturn= $("#numOfRecipes").val().trim();
+    console.log(numRecipesToReturn);
+
     // Here we grab the text from the input box
     //var recipe = $("#recipe-input").val();
-    // Here we grab the text from the input box
-    var recipe = $("#recipe-input").val();
+    // Here we grab the text from the ingredients input box
+    var recipe = $("[name=ingredients]").val().trim();
 
     // Here we construct our URL
     var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?";
@@ -329,12 +434,50 @@ $("#find-recipe").on("click", function(event) {
 
 });
 
-//When save recipe button is clicked, notify the user and save recipe to the databse
+//When save recipe button is clicked, notify the user and save recipe to the database
 $("#recipes-container").on("click",".save-recipe", function(event){
-   // Materialize.toast(message, displayLength, className, completeCallback);
+   
+   var searchUser = current_user;
+   var savedTitle = $(this).attr("data-recipeTitle");
+   console.log(savedTitle);
+   var savedURL = $(this).attr("data-recipeURL");
+   console.log(savedURL);
+   var savedRecipePhoto = $(this).attr("data-recipeImgURL");
+   console.log(savedRecipePhoto);
+    
+    //update records already in the database
+    var newRecipe = {recTitle: savedTitle, recURL: savedURL, imgURL: savedRecipePhoto};
+    console.log(this);
+     databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
+        //usersRef.orderByChild('jincy').once("value", function(snapshot){
+        console.log(snapshot.val());
+
+        console.log(snapshot.child(searchUser).val().savedRecipes);
+
+        var savedRecipeArray = snapshot.child(searchUser).val().savedRecipes;
+        savedRecipeArray.push(newRecipe);
+
+        console.log(savedRecipeArray);
+
+        var currUserRef = usersRef.child(searchUser);
+
+        currUserRef.set({
+                userName: searchUser,
+                savedRecipes: savedRecipeArray
+        });
+
+    });
+    
+ // Materialize.toast(message, displayLength, className, completeCallback);
     Materialize.toast('Recipe saved!', 3000);
-  
+      
+
 });
+
+
+  
+  
+//});
 
 
 

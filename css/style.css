@@ -9,9 +9,6 @@ div{
 	outline-color: orange;
 	margin: 2px;  */
 }
-#recipeBank{
-	padding-top: 15px;
-}
 
 /*
 div{
@@ -37,6 +34,10 @@ div{
   color: white;
 }
 
+#modal h4 {
+
+}
+
 /*Main Container w/ Background Image*/
 
 #mainImage{
@@ -53,16 +54,21 @@ h3 {
   font-family: 'Rock Salt', cursive;
   margin-top: 0px;
 }
+
 h4 {
   color: white;
   font-family: 'Rock Salt', cursive;
   margin-top: 0px;
   line-height: 1.6;
+  width: 275px;
 }
+
 #ingredientInput p {
 	color:white;
 
-#submitBtn{
+}
+
+#find-recipe{
   font-size: 10px;
   word-wrap: break-word;
 }
@@ -76,11 +82,14 @@ h4 {
 
 #numOfRecipes{
   width: 53%;
+  background-color: none;
 }
+
 /*Tabs for Recipes, Videos, and Saved Recipes*/
+#recipeBank{
+  padding-top: 15px;
+}
 
-
->>>>>>> master
 #videoBank{
   margin-top: 10px;
   text-align: center;
@@ -125,16 +134,16 @@ border-radius: 3px;
 
 .card .card-content{
   width: 100%;
-	height: 660px;
+	height: 680px;
 	display: inline-block;
-  xmargin: -20px; 
+  xmargin: -20px;
 }
 .card-content{
 	background-color: #439543;
 }
 .ch-item {
 	width: 100%;
-	height: 430px;
+	height: 470px;
 	xborder-radius: 50%;
 	position: relative;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.1);
@@ -150,8 +159,8 @@ border-radius: 3px;
 	xtop: 20px;
 	xleft: 20px;
 	background: #f9f9f9 url(https://dummyimage.com/600x400/fff/fff);
-	box-shadow: 
-		0 0 0 20px rgba(255,255,255,0.2), 
+	box-shadow:
+		0 0 0 20px rgba(255,255,255,0.2),
 		inset 0 0 3px rgba(115,114, 23, 0.8);
 
 }
@@ -176,7 +185,7 @@ border-radius: 3px;
 	transform: rotate3d(0,1,0,180deg);
 	background: #000;
 }
-/* .ch-img-1 { 
+/* .ch-img-1 {
 	xbackground-image: url(https://spoonacular.com/recipeImages/Crispy-Lemon-Fried-Chicken-443487.jpg);
     background-size: cover;
 } */
@@ -191,8 +200,8 @@ border-radius: 3px;
 	padding: 30px 0 0 0;
 	height: 60px;
 	font-family: 'Open Sans', Arial, sans-serif;
-	text-shadow: 
-		0 0 1px #fff, 
+	text-shadow:
+		0 0 1px #fff,
 		0 1px 2px rgba(0,0,0,0.3);
 }
 .ch-info ul{
@@ -236,8 +245,8 @@ p.readymin {
 	color: rgba(255,242,34, 0.8);
 }
 .ch-item:hover .ch-info-wrap {
-	box-shadow: 
-		0 0 0 0 rgba(255,255,255,0.8), 
+	box-shadow:
+		0 0 0 0 rgba(255,255,255,0.8),
 		inset 0 0 3px rgba(115,114, 23, 0.8);
 }
 
@@ -268,6 +277,12 @@ span.missed {
 span.used {
     background-color: #4f880e;
 }
-
+#savedCard-panel{
+	height: auto !important;
+	background-color: #91a17f !important;
+}
+#savedCard-panel h5 a:hover {
+	color: rgba(255,242,34, 0.8);
+}
 /* -----------------------------------------------------------------------*/
 
