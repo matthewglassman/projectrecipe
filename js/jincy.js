@@ -170,7 +170,7 @@ function styleIngredients(inputArr, spanVal){
 //This function creates recipe cards for each recipe in the recipe results array
 function createRecipeCards(){
     //clear the recipes-container
-    $("#recipes-container").empty();
+    $("#recipes-container").html("");
 
     $.each(recipeResultArray, function( index,   value ) {
 
@@ -474,7 +474,7 @@ $("#find-recipe").on("click", function(event) {
         success: function(response) {
 
             recipeResults = response.results;
-
+            recipeResultArray = []; // We clear the array
             //Extract the recipe Information from the JSON response
             extractRecipeInfo();
 
