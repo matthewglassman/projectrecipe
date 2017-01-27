@@ -340,9 +340,10 @@ function addUserData(){
 //------------------------ON DOCUMENT LOAD----------------------------------------------
 
 $(document).ready( function(){
-    $('.scrollspy').scrollSpy({
-        scrollOffset: 0;
-    });
+    $('.scrollspy').scrollSpy();
+        // scrollOffset: 0
+        // target:""
+    // });
 
     $('.modal').modal();
     $(".button-collapse").sideNav();
@@ -394,6 +395,9 @@ databaseRef.ref().child('users').orderByChild('userName').equalTo(current_user).
 
 // This .on("click") function will trigger the AJAX Call
 $("#find-recipe").on("click", function(event) {
+    //In order for the button to scroll and open the proper tab, we need to change it's class to "active" on-click
+    $("#recipeBank").css("display", "block");
+    $("#userSavedRecipes").css("display", "none");
 
     // Preventing the submit button from trying to submit the form
     console.log("Button clicked");
@@ -530,9 +534,16 @@ $("#ingredientsInput").flexdatalist({
      minLength: 1
 });
 
+//Toggling between active tabs//
 
-//});
+$("#mySaved").on("click", function(){
 
+    $("#onLoad").removeClass("active");
+    $("#recipeBank").css("display", "none");
+
+    $("#userSavedRecipes").css("display", "block");
+    $("#userSavedRecipes").addClass("active");
+});
 
 
 
