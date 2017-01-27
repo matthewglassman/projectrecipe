@@ -8,7 +8,8 @@ var recipeResultArray = [];
 //var search_ingredients = "oranges%2Cflour%2Cchicken";
 var current_user = "";
 //This variable will be user input based on the number of recipes they want to search for.
-var numRecipesToReturn = 0;
+var numRecipesToReturn;
+var searchParameters;
 
 // Initialize Firebase
  var config = {
@@ -28,6 +29,52 @@ var usersRef = firebase.database().ref().child('users');
 
 //--------------------------------------------------------------------------------------
 //-----------------------------FUNCTIONS------------------------------------------------
+//Pulling data from youTube and populating page with videos
+
+function populateYouTubeVideos(){
+
+//This variable will be user input based on the number of videos they want to search for.
+
+ var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchParameters+"&type=video&order=relevance&maxResults="+numRecipesToReturn+"&key=AIzaSyB5ewohlv82vxqUvMYZCS_htMbXO_U66K8";
+      // console.log(searchYouTube);
+      console.log(queryURL);
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+
+      .done(function(response) {
+        var results = response.items;
+        console.log(results);
+
+        for(var i = 0; i < numRecipesToReturn; i++){
+
+          var videoId = results[i].id.videoId;
+          console.log(videoId);
+
+          var videoSRC = "http://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=http://example.com";
+
+          var iFrameDiv = $("<div>");
+          iFrameDiv.attr("class", "video-container")
+          ;
+          iFrameDiv.attr("id","iFrameDiv");
+
+          var iFrame = $("<iframe></iframe>");
+          iFrame.attr("type", "text/html");
+          iFrame.attr("width", "320");
+          iFrame.attr("height", "195");
+          iFrame.attr("src", videoSRC);
+          iFrame.attr("frameborder", "0");
+          iFrame.attr("id", "recipeVideo");
+
+          $("#videoBank").append(iFrameDiv);
+          iFrameDiv.append(iFrame);
+
+        }
+});
+}
+
 // This function extracts the recipe information from the ajax response of Spoonacular API
 function extractRecipeInfo(){
 
@@ -37,7 +84,7 @@ function extractRecipeInfo(){
 
                 //Recipe Info Object
                 var RecipeInfo = {
-                                   recipeTitle: "", 
+                                   recipeTitle: "",
                                    readyMins: 0,
                                    creditText: "",
                                    usedIngredArray: [],
@@ -90,7 +137,7 @@ function extractRecipeInfo(){
                 if (typeof(recipeResults[i].image === "undefined" || recipeResults[i].image === " " )) {
                     RecipeInfo.imageURL = recipeResults[i].image;
                 }
-                
+
 
                 //Push the object to recipeResultArr
                 recipeResultArray.push(RecipeInfo);
@@ -156,14 +203,14 @@ function createRecipeCards(){
         console.log("readyMins: " + value.readyMins);
         console.log("creditText: " + value.creditText);
         console.log("usedIngredArray: " + value.usedIngredArray);
-        console.log("missedIngredArray: " + value.missedIngredArray);  
+        console.log("missedIngredArray: " + value.missedIngredArray);
         console.log("recipeURL: " + value.recipeURL);
         console.log("imageURL: " + value.imageURL);
 
         for(i=0; i<value.usedIngredArray.length; i++){
             console.log(value.usedIngredArray[i] + "  ");
 
-        }      
+        }
 
     });
 
@@ -204,7 +251,7 @@ function createSavedRecipeCards(recipeInfo){
     console.log(recipeInfo);
 
     var img = "http://lorempixel.com/100/190/nature/6";
-    
+
     var html = "<div class='col s12 m6 l6'>";
 
     html += "<div class='card horizontal' id='savedCard'>";
@@ -214,12 +261,12 @@ function createSavedRecipeCards(recipeInfo){
     html += "<div class='card-content' id = 'savedCard-panel'>";
     html += "<h5><a href='" + recipeInfo.recURL + "' target='_blank' class ='black-text'>" + recipeInfo.recTitle + "</a></h5></div>";
     html += "</div></div></div>";
-     
+
     console.log(html);
 
 return html;
 
-} 
+}
 
 // This function pulls saved recipes from database for the logged in user and write it to the saved recipes tab
 function getSavedRecipes(currUser){
@@ -257,12 +304,12 @@ function getSavedRecipes(currUser){
                     $("#savedRecipes-container").append(html);
                 }
             }
-            
+
         }
 
 
     });
-    
+
 
 }
 
@@ -293,13 +340,15 @@ function addUserData(){
 //------------------------ON DOCUMENT LOAD----------------------------------------------
 
 $(document).ready( function(){
-
+    $('.modal').modal();
+    $(".button-collapse").sideNav();
+    $('ul.tabs').tabs();
     console.log("Write to database");
 
     //Write to databse for first time
     //addUserData();
 
-    
+
 });
 
 //----------------------------------------------------------------------------------------------------
@@ -345,7 +394,7 @@ $("#find-recipe").on("click", function(event) {
     // Preventing the submit button from trying to submit the form
     console.log("Button clicked");
     // We're optionally using a form so the user may hit Enter to search instead of clicking the button
-    event.preventDefault();    
+    event.preventDefault();
 
     //Here we grab the text from the input box for number of recipes entered by user
     numRecipesToReturn= $("#numOfRecipes").val().trim();
@@ -362,9 +411,9 @@ $("#find-recipe").on("click", function(event) {
     console.log (recipeCount);
     // Here we construct our URL
     var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?";
-            
+
     //URL parameters
-    //addRecipeInformation: If set to true, you get more information about the recipes returned. 
+    //addRecipeInformation: If set to true, you get more information about the recipes returned.
     queryURL = queryURL + "addRecipeInformation=true&";
     //fillIngredients: setting fill Ingredients to true which returns information about the used and missing ingredients in each recipe.
     queryURL = queryURL + "fillIngredients=true&";
@@ -376,7 +425,7 @@ $("#find-recipe").on("click", function(event) {
      queryURL = queryURL + "instructionsRequired=true&";
 
     //limitLicense: Whether to only show recipes with an attribution license.
-    queryURL = queryURL + "limitLicense=false";
+    queryURL = queryURL + "limitLicense=false&";
 
     //number: The maximal number of recipes to return (default = 5).
     queryURL = queryURL + "number=" + recipeCount + "&";
@@ -388,7 +437,7 @@ $("#find-recipe").on("click", function(event) {
     console.log(queryURL);
 
     $.ajax({
-        url: queryURL, // The URL to the API. 
+        url: queryURL, // The URL to the API.
         type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
         data: {}, // Additional parameters here
         dataType: 'json',
@@ -400,12 +449,12 @@ $("#find-recipe").on("click", function(event) {
             extractRecipeInfo();
 
             //Dynamically create Recipe cards from the recipe extract
-            createRecipeCards();     
+            createRecipeCards();
 
             console.log(response);
 
         },
-        error: function(err) { 
+        error: function(err) {
             console.log(err);
         },
         beforeSend: function(xhr) {
@@ -413,11 +462,19 @@ $("#find-recipe").on("click", function(event) {
         }
     });
 
+  searchParameters = $("[name=ingredients]").val();
+  console.log(searchParameters);
+
+  numRecipesToReturn= $("#numOfRecipes").val();
+  console.log(numRecipesToReturn);
+
+  //   populateYouTubeVideos();
+
 });
 
 //When save recipe button is clicked, notify the user and save recipe to the database
 $("#recipes-container").on("click",".save-recipe", function(event){
-   
+
    var searchUser = current_user;
    var savedTitle = $(this).attr("data-recipeTitle");
    console.log(savedTitle);
@@ -425,7 +482,7 @@ $("#recipes-container").on("click",".save-recipe", function(event){
    console.log(savedURL);
    var savedRecipePhoto = $(this).attr("data-recipeImgURL");
    console.log(savedRecipePhoto);
-    
+
     //update records already in the database
     var newRecipe = {recTitle: savedTitle, recURL: savedURL, imgURL: savedRecipePhoto};
     console.log(this);
@@ -456,16 +513,29 @@ $("#recipes-container").on("click",".save-recipe", function(event){
         });
 
     });
-    
+
  // Materialize.toast(message, displayLength, className, completeCallback);
     Materialize.toast('Recipe saved!', 3000);
-      
+
+
+});
+
+//Flexdatalist//
+
+$("#ingredientsInput").flexdatalist({
+     minLength: 1
+});
+
+//Redirecting
+
+$(".scrollToBtm").on("click", function(event){
+
+  $("nav, body, html").animate({
+    scrollTop: $($(this).attr("href")).offset().top}, 600);
 
 });
 
 
-  
-  
 //});
 
 
