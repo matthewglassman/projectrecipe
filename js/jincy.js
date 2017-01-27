@@ -248,7 +248,7 @@ function getSavedRecipes(currUser){
             if(typeof arrSavedRecipes !== "undefined"){
 
                 //Loop through the array and generate html for each recipe
-                for ( i = 1, j = arrSavedRecipes.length; i<j; i++){
+                for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
 
                     console.log(arrSavedRecipes[i]);
 
@@ -436,7 +436,15 @@ $("#recipes-container").on("click",".save-recipe", function(event){
         console.log(snapshot.child(searchUser).val().savedRecipes);
 
         var savedRecipeArray = snapshot.child(searchUser).val().savedRecipes;
-        savedRecipeArray.push(newRecipe);
+
+         if (typeof savedRecipeArray !== "undefined"){
+            savedRecipeArray.push(newRecipe);
+        }else{
+            savedRecipeArray=[];
+            savedRecipeArray[0] = newRecipe;
+        }
+
+        //savedRecipeArray.push(newRecipe);
 
         console.log(savedRecipeArray);
 
