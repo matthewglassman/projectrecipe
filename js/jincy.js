@@ -65,7 +65,7 @@ function populateYouTubeVideos(){
           var videoId = results[i].id.videoId;
           console.log(videoId);
 
-          var videoSRC = "http://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=http://example.com";
+          var videoSRC = "https://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=https://example.com";
 
           var iFrameDiv = $("<div>");
           iFrameDiv.attr("class", "video-container")
