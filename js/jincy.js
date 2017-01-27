@@ -340,6 +340,10 @@ function addUserData(){
 //------------------------ON DOCUMENT LOAD----------------------------------------------
 
 $(document).ready( function(){
+    $('.scrollspy').scrollSpy({
+        scrollOffset: 0;
+    });
+
     $('.modal').modal();
     $(".button-collapse").sideNav();
     $('ul.tabs').tabs();
@@ -524,15 +528,6 @@ $("#recipes-container").on("click",".save-recipe", function(event){
 
 $("#ingredientsInput").flexdatalist({
      minLength: 1
-});
-
-//Redirecting
-
-$(".scrollToBtm").on("click", function(event){
-
-  $("nav, body, html").animate({
-    scrollTop: $($(this).attr("href")).offset().top}, 600);
-
 });
 
 
