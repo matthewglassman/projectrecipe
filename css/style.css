@@ -60,7 +60,7 @@ h4 {
   font-family: 'Rock Salt', cursive;
   margin-top: 0px;
   line-height: 1.6;
-  width: 275px;
+  display: inline-block;
 }
 
 #ingredientInput p {
@@ -81,7 +81,7 @@ h4 {
 }
 
 #numOfRecipes{
-  width: 53%;
+  width: 50%;
   background-color: none;
 }
 
@@ -112,7 +112,6 @@ margin-bottom: 15px;
 
 .tabs .indicator {
     background-color: #880e4f !important;
-    display: none;
 }
 
 .tabs .tab a.active {

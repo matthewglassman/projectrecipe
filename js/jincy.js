@@ -340,10 +340,9 @@ function addUserData(){
 //------------------------ON DOCUMENT LOAD----------------------------------------------
 
 $(document).ready( function(){
-    $('.scrollspy').scrollSpy();
-        // scrollOffset: 0
-        // target:""
-    // });
+    $('.scrollspy').scrollSpy({
+        scrollOffset: 0
+    });
 
     $('.modal').modal();
     $(".button-collapse").sideNav();
@@ -534,17 +533,13 @@ $("#ingredientsInput").flexdatalist({
      minLength: 1
 });
 
-//Toggling between active tabs//
+//Toggling between active tabs after clicking "My Saved Recipes" on mobile view and closes navbar//
 
-$("#mySaved").on("click", function(){
-
-    $("#onLoad").removeClass("active");
-    $("#recipeBank").css("display", "none");
-
-    $("#userSavedRecipes").css("display", "block");
-    $("#userSavedRecipes").addClass("active");
+$("#mySavedMobile").on("click", function(){
+    $(".button-collapse").sideNav({
+         closeOnClick: true
+    });
 });
-
 
 
 
