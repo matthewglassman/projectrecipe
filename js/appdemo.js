@@ -150,7 +150,6 @@ $("#find-recipe").on("click", function(event) {
                 }else{
                     creditText = recipeResults[i].sourceName;
                 }
-
                 //Get the used Ingredients
                 usedIngredArray = addIngredients(recipeResults[i].usedIngredients);
 

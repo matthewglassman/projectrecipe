@@ -28,11 +28,10 @@ var usersRef = firebase.database().ref().child('users');
 
 //--------------------------------------------------------------------------------------
 //-----------------------------FUNCTIONS------------------------------------------------
-
 // This function extracts the recipe information from the ajax response of Spoonacular API
 function extractRecipeInfo(){
 
-        console.log(recipeResults);
+        console.log("extractRecipeInfo: ", recipeResults);
 
         for (var i = 0, j = recipeResults.length; i < j; i++) {
 
@@ -49,16 +48,15 @@ function extractRecipeInfo(){
 
                 //Get the recipe title
                 console.log("Title: " + recipeResults[i].title);
-                if (recipeResults[i].title === "undefined" || recipeResults[i].title === " " ) {
+                if (typeof(recipeResults[i].title) === "undefined" || recipeResults[i].title === " " ) {
                         RecipeInfo.recipeTitle = errMsg;
                 }else{
                     RecipeInfo.recipeTitle = recipeResults[i].title;
                 }
 
-
                 //Get the Ready in Minutes
                 console.log("Cooking minutes: " + recipeResults[i].readyInMinutes);
-                if (recipeResults[i].readyInMinutes === "undefined" || recipeResults[i].readyInMinutes === 0 ) {
+                if (typeof(recipeResults[i].readyInMinutes) === "undefined" || recipeResults[i].readyInMinutes === 0 ) {
                         RecipeInfo.readyMins = errMsg;
                 }else{
                     RecipeInfo.readyMins = recipeResults[i].readyInMinutes;
@@ -66,7 +64,8 @@ function extractRecipeInfo(){
 
                 //Get the Credit text
                 console.log("Credit text: " + recipeResults[i].sourceName);
-                if (recipeResults[i].sourceName === "undefined" || recipeResults[i].sourceName === " " ) {
+                if (typeof(recipeResults[i].sourceName) === "undefined" || recipeResults[i].sourceName === " " ) {
+                       // console.log("%csourceName was undefined", 'background: #222; color: #bada55')
                         RecipeInfo.creditText = errMsg;
                 }else{
                     RecipeInfo.creditText = recipeResults[i].sourceName;
@@ -80,7 +79,7 @@ function extractRecipeInfo(){
 
                 //Get the recipe URL
                 console.log("Recipe URL: " + recipeResults[i].sourceUrl);
-                if (recipeResults[i].sourceUrl === "undefined" || recipeResults[i].sourceUrl === " " ) {
+                if (typeof(recipeResults[i].sourceUrl) === "undefined" || recipeResults[i].sourceUrl === " " ) {
                         RecipeInfo.recipeURL = errMsg;
                 }else{
                     RecipeInfo.recipeURL = recipeResults[i].sourceUrl;
@@ -88,7 +87,7 @@ function extractRecipeInfo(){
 
                 //Get Image URL
                 console.log("Image URL: " + recipeResults[i].image);
-                if (recipeResults[i].image === "undefined" || recipeResults[i].image === " " ) {
+                if (typeof(recipeResults[i].image === "undefined" || recipeResults[i].image === " " ) {
                         RecipeInfo.imageURL = errMsg;
                 }else{
                     RecipeInfo.imageURL = recipeResults[i].image;
