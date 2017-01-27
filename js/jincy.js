@@ -206,12 +206,12 @@ function createSavedRecipeCards(recipeInfo){
     console.log(recipeInfo);
 
     var img = "http://lorempixel.com/100/190/nature/6";
-
+    
     var html = "<div class='col s12 m6 l6'>";
 
     html += "<div class='card horizontal' id='savedCard'>";
     html += "<div class='card-image'>";
-    html += "<img src='" + img + "' class = 'circle responsive-img'></div>";
+    html += "<img src='" + recipeInfo.imgURL + "' class = 'circle responsive-img'></div>";
     html += "<div class='card-stacked'>";
     html += "<div class='card-content' id = 'savedCard-panel'>";
     html += "<h5><a href='" + recipeInfo.recURL + "' target='_blank' class ='black-text'>" + recipeInfo.recTitle + "</a></h5></div>";
@@ -244,14 +244,22 @@ function getSavedRecipes(currUser){
             $("#savedRecipes-container").empty();
 
             var arrSavedRecipes = snapshot.child(currUser).val().savedRecipes;
+            console.log(arrSavedRecipes);
 
-            //Loop through the array and generate html for each recipe
-            for ( i = 0, j = arrSavedRecipes.length; i<j; i++){
+            //Proceed only if there is atleast one saved recipe
+            if(typeof arrSavedRecipes !== "undefined"){
 
-                var html = createSavedRecipeCards(arrSavedRecipes[i]);
+                //Loop through the array and generate html for each recipe
+                for ( i = 1, j = arrSavedRecipes.length; i<j; i++){
 
-                $("#savedRecipes-container").append(html);
+                    console.log(arrSavedRecipes[i]);
+
+                    var html = createSavedRecipeCards(arrSavedRecipes[i]);
+
+                    $("#savedRecipes-container").append(html);
+                }
             }
+            
         }
 
 
@@ -265,10 +273,8 @@ function addUserData(){
 
     var userArray = ["jincy", "jamie", "mathew", "kathleen"];
     var recipeInfoArray1 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1", imgURL: "IMAGEurl1"},
-                            {recTitle: "recipe2", recURL: "recipeURL2", imgURL: "IMAGEurl1"}
-                            
-    ];
+                            {recTitle: "recipe1", recURL: "recipeURL1", imgURL: "IMAGEurl1"}
+                            ];
 
     for(i=0; i<userArray.length; i++){
 
@@ -293,57 +299,9 @@ $(document).ready( function(){
     console.log("Write to database");
 
     //Write to databse for first time
-    addUserData();
-/*
-    for(i=0; i<userArray.length; i++){
+    //addUserData();
 
-        var myUser = usersRef.child(userArray[i]);
-        myUser.set({
-                userName: userArray[i],
-                savedRecipes: recipeInfoArray1
-        });
-
-    }*/
-
-<<<<<<< HEAD
-/*    var searchUser = "jincy";
-    //update records already in the database
-    var newRecipe = {recTitle: "recipe4", recURL: "recipeURL4"};
-     databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
-        //usersRef.orderByChild('jincy').once("value", function(snapshot){
-        console.log(snapshot.val());
-=======
-    // var searchUser = "jincy";
-    // //update records already in the database
-    // var newRecipe = {recTitle: "recipe4", recURL: "recipeURL4"};
-    //  databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
-    //     //usersRef.orderByChild('jincy').once("value", function(snapshot){
-    //     console.log(snapshot.val());
->>>>>>> master
-
-    //     console.log(snapshot.child(searchUser).val().savedRecipes);
-
-    //     var savedRecipeArray = snapshot.child(searchUser).val().savedRecipes;
-    //     savedRecipeArray.push(newRecipe);
-
-    //     console.log(savedRecipeArray);
-
-    //     var currUserRef = usersRef.child(searchUser);
-
-    //     currUserRef.set({
-    //             userName: searchUser,
-    //             savedRecipes: savedRecipeArray
-    //     });
-
-<<<<<<< HEAD
-    });*/
-=======
-    // });
->>>>>>> master
     
-
-      
-
 });
 
 //----------------------------------------------------------------------------------------------------
