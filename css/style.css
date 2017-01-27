@@ -84,6 +84,9 @@ h4 {
   width: 53%;
   background-color: none;
 }
+input[type=text]:focus{
+	background-color: #439543;
+}
 
 /*Tabs for Recipes, Videos, and Saved Recipes*/
 #recipeBank{
