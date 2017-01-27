@@ -80,9 +80,9 @@ $("#find-recipe").on("click", function(event){
   numRecipesToReturn= $("#numOfRecipes").val();
   console.log(numRecipesToReturn);
 
-  $("body, html").animate({
+  });
+//When you click My Saved Recipes or Let's Get Cooking it will scroll to the appropriate container.
 
-  })
 
   // if (isNaN(numRecipesToReturn)){
   //   $("#badNumber").html("<b>Not A Number</b>");
@@ -103,5 +103,11 @@ $("#find-recipe").on("click", function(event){
 // var takeMeTo = window.location;
 // takeMeTo = $(this).data("url");
 // console.log("takemeto: "+takeMeTo);
-});
+
+// $(".scrollToBtm").on("click", function(event){
+
+//   $("nav, body, html").animate({
+//     scrollTop: $($(this).attr("href")).offset().top}, 600);
+
+// });
 
