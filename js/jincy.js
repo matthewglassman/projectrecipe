@@ -29,6 +29,18 @@ var usersRef = firebase.database().ref().child('users');
 
 //--------------------------------------------------------------------------------------
 //-----------------------------FUNCTIONS------------------------------------------------
+//Clear user input, on-click of "Let's get cooking!"
+function clearInput (){
+    $("#ingredientsInput").val("");
+    $("#numOfRecipes").val("");
+}
+
+//Clear containers
+function clearContainers(){
+    $("#recipeBank").empty();
+    $("#videoBank").empty();
+}
+
 //Pulling data from youTube and populating page with videos
 
 function populateYouTubeVideos(){
@@ -422,7 +434,7 @@ $("#find-recipe").on("click", function(event) {
 
     numRecipesToReturn= $("#numOfRecipes").val();
     console.log(numRecipesToReturn);
-  
+
     //Here we are replacing the commase in the search parameters with %2C
     var search_ingredients = searchParameters.replace(/,/g, "%2C");
     console.log (search_ingredients);
@@ -481,7 +493,7 @@ $("#find-recipe").on("click", function(event) {
     });
 
   // populateYouTubeVideos();
-
+    clearInput();
 });
 
 //When save recipe button is clicked, notify the user and save recipe to the database
@@ -489,7 +501,7 @@ $("#recipes-container").on("click",".save-recipe", function(event){
 
    var searchUser = current_user;
 
-   
+
    var savedTitle = $(this).attr("data-recipeTitle");
    console.log(savedTitle);
    var savedURL = $(this).attr("data-recipeURL");
