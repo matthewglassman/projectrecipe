@@ -271,7 +271,7 @@ function addUserData(){
 
     var userArray = ["jincy", "jamie", "mathew", "kathleen"];
     var recipeInfoArray1 = [
-                            {recTitle: "recipe1", recURL: "recipeURL1", imgURL: "IMAGEurl1"}
+                            /*{recTitle: "recipe1", recURL: "recipeURL1", imgURL: "IMAGEurl1"}*/
                             ];
 
     for(i=0; i<userArray.length; i++){
@@ -297,8 +297,7 @@ $(document).ready( function(){
     console.log("Write to database");
 
     //Write to databse for first time
-    //addUserData();
-
+    addUserData();
     
 });
 
@@ -323,14 +322,28 @@ $("#user-login").on("click", function(event){
 });
 
 //----------------------------------------------------------------------------------------------------
-//----------------------------------------LOAD NEW SAVED RECIPES--------------------------------------
-databaseRef.ref().child('users').orderByChild('userName').equalTo(current_user).on("child_added", function(snapshot){
+//---------------------------WRITE NEW SAVED RECIPES TO THE SAVED RECIPES TAB-------------------------
 
-    console.log("Inside child added");
+
+usersRef.on("child_changed", function(snapshot){
+
+
+    console.log("Inside child changed");
 
     console.log(snapshot.val());
 
-    console.log(snapshot.child(current_user).val().savedRecipes);
+    var arrSavedRecipes = snapshot.val().savedRecipes;
+
+    //Get the last entry in recipe array
+    var recentSavedRecipe = arrSavedRecipes[arrSavedRecipes.length - 1];
+
+    console.log(recentSavedRecipe);
+
+    var html = createSavedRecipeCards(recentSavedRecipe);
+
+    $("#savedRecipes-container").append(html);
+
+    //console.log(snapshot.child(current_user).val().savedRecipes);
 
 
 });
@@ -357,9 +370,11 @@ $("#find-recipe").on("click", function(event) {
     var recipe = $("[name=ingredients]").val().trim();
     var search_ingredients = recipe.replace(/,/g, "%2C");
     console.log (search_ingredients);
+
     //here is where we get the number of recipes
     var recipeCount = $("#numOfRecipes").val();
     console.log (recipeCount);
+
     // Here we construct our URL
     var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?";
             
@@ -376,7 +391,7 @@ $("#find-recipe").on("click", function(event) {
      queryURL = queryURL + "instructionsRequired=true&";
 
     //limitLicense: Whether to only show recipes with an attribution license.
-    queryURL = queryURL + "limitLicense=false";
+    queryURL = queryURL + "limitLicense=false&";
 
     //number: The maximal number of recipes to return (default = 5).
     queryURL = queryURL + "number=" + recipeCount + "&";
@@ -430,7 +445,7 @@ $("#recipes-container").on("click",".save-recipe", function(event){
     var newRecipe = {recTitle: savedTitle, recURL: savedURL, imgURL: savedRecipePhoto};
     console.log(this);
      databaseRef.ref().child('users').orderByChild('userName').equalTo(searchUser).once("value", function(snapshot){
-        //usersRef.orderByChild('jincy').once("value", function(snapshot){
+
         console.log(snapshot.val());
 
         console.log(snapshot.child(searchUser).val().savedRecipes);
@@ -444,7 +459,6 @@ $("#recipes-container").on("click",".save-recipe", function(event){
             savedRecipeArray[0] = newRecipe;
         }
 
-        //savedRecipeArray.push(newRecipe);
 
         console.log(savedRecipeArray);
 
