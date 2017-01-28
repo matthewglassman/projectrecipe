@@ -30,6 +30,18 @@ var usersRef = firebase.database().ref().child('users');
 
 //--------------------------------------------------------------------------------------
 //-----------------------------FUNCTIONS------------------------------------------------
+//Clear user input, on-click of "Let's get cooking!"
+function clearInput (){
+    $("#ingredientsInput").val("");
+    $("#numOfRecipes").val("");
+}
+
+//Clear containers
+function clearContainers(){
+    $("#recipeBank").empty();
+    $("#videoBank").empty();
+}
+
 //Pulling data from youTube and populating page with videos
 
 function populateYouTubeVideos(){
@@ -54,7 +66,7 @@ function populateYouTubeVideos(){
           var videoId = results[i].id.videoId;
           console.log(videoId);
 
-          var videoSRC = "http://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=http://example.com";
+          var videoSRC = "https://www.youtube.com/embed/"+videoId+"?enablejsapi=1&origin=https://example.com";
 
           var iFrameDiv = $("<div>");
           iFrameDiv.attr("class", "video-container")
@@ -159,7 +171,7 @@ function styleIngredients(inputArr, spanVal){
 //This function creates recipe cards for each recipe in the recipe results array
 function createRecipeCards(){
     //clear the recipes-container
-    $("#recipes-container").empty();
+    $("#recipes-container").html("");
 
     $.each(recipeResultArray, function( index,   value ) {
 
@@ -341,6 +353,10 @@ function addUserData(){
 //------------------------ON DOCUMENT LOAD----------------------------------------------
 
 $(document).ready( function(){
+    $('.scrollspy').scrollSpy({
+        scrollOffset: 0
+    });
+
     $('.modal').modal();
     $(".button-collapse").sideNav();
     $('ul.tabs').tabs();
@@ -404,6 +420,9 @@ usersRef.on("child_changed", function(snapshot){
 
 // This .on("click") function will trigger the AJAX Call
 $("#find-recipe").on("click", function(event) {
+    //In order for the button to scroll and open the proper tab, we need to change it's class to "active" on-click
+    $("#recipeBank").css("display", "block");
+    $("#userSavedRecipes").css("display", "none");
 
     // Preventing the submit button from trying to submit the form
     console.log("Button clicked");
@@ -416,7 +435,7 @@ $("#find-recipe").on("click", function(event) {
 
     numRecipesToReturn= $("#numOfRecipes").val();
     console.log(numRecipesToReturn);
-  
+
     //Here we are replacing the commase in the search parameters with %2C
     var search_ingredients = searchParameters.replace(/,/g, "%2C");
     console.log (search_ingredients);
@@ -456,7 +475,7 @@ $("#find-recipe").on("click", function(event) {
         success: function(response) {
 
             recipeResults = response.results;
-
+            recipeResultArray = []; // We clear the array
             //Extract the recipe Information from the JSON response
             extractRecipeInfo();
 
@@ -481,7 +500,7 @@ $("#find-recipe").on("click", function(event) {
     });
 
   // populateYouTubeVideos();
-
+    clearInput();
 });
 
 //When save recipe button is clicked, notify the user and save recipe to the database
@@ -489,7 +508,7 @@ $("#recipes-container").on("click",".save-recipe", function(event){
 
    var searchUser = current_user;
 
-   
+
    var savedTitle = $(this).attr("data-recipeTitle");
    console.log(savedTitle);
    var savedURL = $(this).attr("data-recipeURL");
@@ -539,19 +558,13 @@ $("#ingredientsInput").flexdatalist({
      minLength: 1
 });
 
-//Redirecting
+//Toggling between active tabs after clicking "My Saved Recipes" on mobile view and closes navbar//
 
-$(".scrollToBtm").on("click", function(event){
-
-  $("nav, body, html").animate({
-    scrollTop: $($(this).attr("href")).offset().top}, 600);
-
+$("#mySavedMobile").on("click", function(){
+    $(".button-collapse").sideNav({
+         closeOnClick: true
+    });
 });
-
-
-//});
-
-
 
 
 
