@@ -85,7 +85,8 @@ h4 {
   background-color: none;
 }
 
-input[type=text]:focus{
+#numOfRecipes:focus,
+#ingredientsInput-flexdatalist:focus{
 	background-color: #439543;
 }
 

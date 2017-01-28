@@ -537,7 +537,9 @@ $("#recipes-container").on("click",".save-recipe", function(event){
                 savedRecipes: savedRecipeArray
         });
 
-    });
+    }, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
 
  // Materialize.toast(message, displayLength, className, completeCallback);
     Materialize.toast('Recipe saved!', 3000);
