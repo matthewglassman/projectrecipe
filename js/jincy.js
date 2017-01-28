@@ -10,6 +10,7 @@ var current_user = "";
 //This variable will be user input based on the number of recipes they want to search for.
 var numRecipesToReturn;
 var searchParameters;
+var exists = "true";
 
 // Initialize Firebase
  var config = {
@@ -197,7 +198,7 @@ function createRecipeCards(){
         html += "<div class='card-action'>";
         html += "<span class='card-title'>" + value.recipeTitle + "</span>";
         html += "<h6 class = 'credit-text'>via " + value.creditText + "</h6><br />";
-        html += "<div class = 'save-recipe' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'><a class='waves-effect pink darken-4 btn-flat'>+ SAVE</a></div>";
+        html += "<div class = 'save-recipe' data-recipeTitle ='" + value.recipeTitle + "' data-recipeURL = '" +  value.recipeURL + "' data-recipeImgURL = '" +  value.imageURL + "'><a class='waves-effect pink darken-4 btn-flat savebtn'>+ SAVE</a></div>";
         html += "</div></div></div></div>";
 
         /*$("div#" + ch_item_ID).addClass(imgClass);
@@ -289,7 +290,7 @@ function getSavedRecipes(currUser){
         console.log(snapshot.val());
 
         //Check if user exists in databse
-        var exists = (snapshot.val() !== null);
+        exists = (snapshot.val() !== null);
         console.log(exists);
 
 
@@ -481,6 +482,12 @@ $("#find-recipe").on("click", function(event) {
             //Dynamically create Recipe cards from the recipe extract
             createRecipeCards();
 
+            //If user has not logged in disable save button
+            console.log(current_user);
+            if((current_user === "") || (exists === false)){
+                $('.savebtn').addClass('disabled');
+            }
+
             console.log(response);
 
         },
@@ -537,7 +544,9 @@ $("#recipes-container").on("click",".save-recipe", function(event){
                 savedRecipes: savedRecipeArray
         });
 
-    });
+    }, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
 
  // Materialize.toast(message, displayLength, className, completeCallback);
     Materialize.toast('Recipe saved!', 3000);
