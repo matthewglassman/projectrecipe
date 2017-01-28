@@ -86,7 +86,8 @@ h4 {
 }
 
 input[type=text]:focus{
-	background-color: #439543;
+	background-color: #a1887f;
+	
 }
 
 /*Tabs for Recipes, Videos, and Saved Recipes*/

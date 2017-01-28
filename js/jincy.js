@@ -59,7 +59,7 @@ function populateYouTubeVideos(){
       .done(function(response) {
         var results = response.items;
         console.log(results);
-
+        $("#videoBank").html('');
         for(var i = 0; i < numRecipesToReturn; i++){
 
           var videoId = results[i].id.videoId;
@@ -492,7 +492,7 @@ $("#find-recipe").on("click", function(event) {
         }
     });
 
-  // populateYouTubeVideos();
+    populateYouTubeVideos();
     clearInput();
 });
 
