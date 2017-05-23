@@ -1,6 +1,6 @@
 # Polished Papaya's Pantry
 
-Ever come wonder what recipes you could make just from the items you find in your pantry?  This app will help you do just that.
+Ever wonder what recipes you could make just from the items you find in your pantry?  This app will help you do just that.
 This app generates recipe cards and related instructional videos based on a user's input about what ingredients they have to luse.
 An authenticated user can save the recipe cards for future use in the event that one of the recipes they make turns out to be a winner.
 
